@@ -8,6 +8,12 @@ use Core\HTML\BootstrapForm;
 
 class UserController extends AppController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->loadModel('User');
+    }
+
     public function login()
     {
         $errors = \false;
@@ -25,6 +31,7 @@ class UserController extends AppController
 
     public function add()
     {
+
         if (!empty($_POST)) {
             $user = $this->User->create([
                 "firstName" => $_POST["firstName"],
@@ -41,4 +48,3 @@ class UserController extends AppController
         $this->render('user.add', \compact('form'));
     }
 }
-

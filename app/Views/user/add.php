@@ -1,5 +1,3 @@
-<?php var_dump($form); ?>
-
 <form method='post'>
     <?= $form->input('firstName', 'Prénom'); ?>
     <?= $form->input('lastName', 'Nom'); ?>

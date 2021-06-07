@@ -2,11 +2,15 @@
 <p><em><?= $post->category; ?></em></p>
 <p><?= $post->content; ?></p>
 <?php foreach ($comments as $comment) : ?>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     <p><?= $comment->content; ?> par <?= $comment->user; ?> le <?= $comment->date; ?></p>
+=======
+    <p><?= $comment->content; ?> par <?= $comment->user; ?> le <?= $comment->lastDate; ?></p>
+>>>>>>> feature/comment/#7
 <?php endforeach; ?>
 
-<form method="post">
+<form action="index.php/?p=comment.add&id=<?= $post->id ?>" method="post">
     <h3>Vous voulez réagir ? N'hésitez pas les bros !</h3>
     <?= $form->input("content", "Commentaire", ["type" => "textarea"]); ?>
     <button class="btn btn-primary">Commenter !</button>

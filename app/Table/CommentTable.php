@@ -15,16 +15,24 @@ class CommentTable extends Table
     public function findWithPost($id)
     {
         return $this->query(
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             'SELECT DISTINCT c.id, c.content, c.lastDate date, u.username user FROM comment c LEFT JOIN user u ON u.id = c.user_id INNER JOIN post p ON  c.post_id = ? ORDER BY date DESC',
 =======
             'SELECT DISTINCT c.id, c.content, c.lastDate lastDate, u.username user FROM comment c LEFT JOIN user u ON u.id = c.user_id INNER JOIN post p ON  c.post_id = ? WHERE c.approved = 1 ORDER BY lastDate DESC',
 >>>>>>> Stashed changes
+=======
+            'SELECT DISTINCT c.id, c.content, c.lastDate lastDate, u.username user FROM comment c LEFT JOIN user u ON u.id = c.user_id INNER JOIN post p ON  c.post_id = ? WHERE approved = 1 ORDER BY lastDate DESC',
+>>>>>>> feature/comment/#7
             [$id]
         );
     }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+
+>>>>>>> feature/comment/#7
     public function modified($id)
 =======
     public function pending()

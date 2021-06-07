@@ -23,8 +23,12 @@ class PostController extends AppController
     {
         $category =  $this->Category->find($_GET['id']);
 
+<<<<<<< Updated upstream
         if ($category === false) {
             $this->notFound();
+=======
+            \header('Location: index.php?p=post.show.'.$_GET['id']);
+>>>>>>> Stashed changes
         }
 
         $posts = $this->Post->lastByCategory($_GET['id']);

@@ -3,6 +3,7 @@
 namespace Core\Auth;
 
 use Core\Database\MysqlDatabase;
+use PDOException;
 
 class DBAuth
 {
@@ -20,18 +21,20 @@ class DBAuth
         }
         return \false;
     }
+
     /**
-     *
-     * @param mixed $username
+     * @param mixed $usernameOrEmail
      * @param mixed $password
-     * @return bool
+     * @return mixed
+     * @throws PDOException
      */
-    public function login($username, $password)
+    public function login($usernameOrEmail, $password)
     {
-        $user = $this->db->prepare("SELECT * FROM user WHERE username = ?", [$username], \null, \true);
+        $user = $this->db->prepare("SELECT * FROM user WHERE username = ? or email = ?", [$usernameOrEmail,$usernameOrEmail], \null, \true);
         if ($user) {
-            if ($user->password === \sha1($password)) {
+            if (\password_verify($password, $user->password)) {
                 $_SESSION["auth"] = $user->id;
+                isset($user->admin) ? $_SESSION['admin'] = $user->admin : \false;
                 return \true;
             }
         }

@@ -21,30 +21,23 @@ class PostController extends AppController
         $this->render('post.index', \compact('posts', 'categories'));
     }
 
-    public function category()
+    public function category($postId)
     {
-        $category =  $this->Category->find($_GET['id']);
+        $category =  $this->Category->find($postId);
 
         if ($category === false) {
             $this->notFound();
         }
 
-        $posts = $this->Post->lastByCategory($_GET['id']);
+        $posts = $this->Post->lastByCategory($postId);
         $categories = $this->Category->all();
         $this->render('post.category', \compact('posts', 'categories', 'category'));
     }
 
-    public function show()
+    public function show($postId)
     {
-        $post = $this->Post->findWithCategory($_GET['id']);
-        $comments = $this->Comment->findWithPost($_GET['id']);
-
-        if (!empty($_POST)) {
-            $result = $this->Comment->create([
-                "content" => $_POST["content"]
-            ]);
-        }
-
+        $post = $this->Post->findWithCategory($postId);
+        $comments = $this->Comment->findWithPost($postId);
         $form = new BootstrapForm($_POST);
         $this->render('post.show', \compact('post', 'comments', 'form'));
     }

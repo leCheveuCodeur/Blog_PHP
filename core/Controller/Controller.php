@@ -16,10 +16,20 @@ class Controller
         require($this->viewPath . 'templates/' . $this->template . '.php');
     }
 
+    protected function previousPage()
+    {
+        if (isset($_GET['return'])) {
+            return \header('Location: index.php?p=' . $_GET['return']);
+        }
+        return \header('Location: index.php');
+    }
+
     protected function forbidden()
     {
         header("HTTP/1.0 403 Forbidden");
-        die("Acces interdit");
+        die('Acces interdit');
+        return \header('refresh:3;url=index.php');
+
     }
 
     protected function notFound()

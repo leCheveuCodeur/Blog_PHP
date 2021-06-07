@@ -15,7 +15,7 @@ class PostTable extends Table
     public function last()
     {
         return $this->query(
-            "SELECT post.id, post.title, post.content, post.date, category.title as category FROM post LEFT JOIN category ON category_id = category.id ORDER BY post.date DESC"
+            "SELECT p.id, p.title,p.lead, p.lastDate, c.title as category FROM post p LEFT JOIN category c ON p.category_id = c.id ORDER BY p.firstDate DESC"
         );
     }
 
@@ -28,7 +28,7 @@ class PostTable extends Table
     public function findWithCategory($id)
     {
         return $this->query(
-            "SELECT post.id, post.title, post.content, post.date, category.title as category FROM post LEFT JOIN category ON category_id = category.id WHERE post.id = ?",
+            "SELECT p.id, p.title, p.title,p.content, p.lastDate, c.title as category FROM post p LEFT JOIN category c ON p.category_id = c.id WHERE p.id = ?",
             [$id],
             \true
         );
@@ -43,7 +43,7 @@ class PostTable extends Table
     public function lastByCategory($category_id)
     {
         return $this->query(
-            "SELECT post.id, post.title, post.content, category.title as category FROM post LEFT JOIN category ON category_id = category.id WHERE post.category_id = ? ORDER BY post.date DESC",
+            "SELECT p.id, p.title, p.lead, c.title as category FROM post p LEFT JOIN category c ON p.category_id = c.id WHERE p.category_id = ? ORDER BY p.firstDate DESC",
             [$category_id]
         );
     }

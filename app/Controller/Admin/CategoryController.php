@@ -32,28 +32,24 @@ class CategoryController extends AppController
         $this->render('admin.category.edit', \compact('form'));
     }
 
-    public function edit()
+    public function edit($id)
     {
         if (!empty($_POST)) {
-            $result = $this->Category->update($_GET["id"], [
+            $result = $this->Category->update($id, [
                 "title" => $_POST["title"]
             ]);
 
             return  $this->index();
         }
 
-        $category = $this->Category->find($_GET["id"]);
-
+        $category = $this->Category->find($id);
         $form = new BootstrapForm($category);
-
         $this->render('admin.category.edit', \compact('form'));
     }
 
-    public function delete()
+    public function delete($id)
     {
-        if (!empty($_POST)) {
-            $result = $this->Category->delete($_POST["id"]);
-            return $this->index();
-        }
+        $this->Category->delete($id);
+        return \header('Location: index.php?p=admin.category.index');
     }
 }

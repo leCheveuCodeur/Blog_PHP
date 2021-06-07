@@ -1,9 +1,6 @@
-<?php if ($errors) : ?>
-    <div class="alert alert-danger">Identifiants incorrect</div>
-<?php endif; ?>
 <form method="post">
-    <?= $form->input("username", "Pseudo"); ?>
+    <?= $form->input("usernameOrEmail", "Pseudo ou Email"); ?>
     <?= $form->input("password", "Mot de passe", ["type" => "password"]); ?>
     <button class="btn btn-primary">Envoyer</button>
 </form>
-<a href="">Créer un compte</a>
+<a href="?p=user.add&return=user.login">Créer un compte</a>

@@ -9,12 +9,12 @@ class PostEntity extends Entity
 
     public function getUrl()
     {
-        return "index.php?p=post.show&id=" . $this->id;
+        return 'index.php?p=post.show.'.$this->id;
     }
 
     public function getExtrait()
     {
-        $html = "<p>" . \substr($this->content, 0, 100) . "...</p>";
+        $html = "<p>" . \substr($this->lead, 0, 100) . "...</p>";
         $html .= "<p><a href= " . $this->getUrl() . ">Voir la suite</a></p>";
         return $html;
     }

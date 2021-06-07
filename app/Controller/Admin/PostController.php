@@ -10,59 +10,68 @@ class PostController extends AppController
     {
         parent::__construct();
         $this->loadModel('Post');
-
     }
-    public function index()
+
+    /**
+     *
+     * @param null|string $message
+     * @return void
+     */
+    public function index(?string $message = \null)
     {
         $posts = $this->Post->all();
-        $this->render('admin.post.index', \compact('posts'));
+        $this->render('admin.post.index', \compact('posts', 'message'));
     }
 
     public function add()
     {
         if (!empty($_POST)) {
             $result = $this->Post->create([
-                "title" => $_POST["title"],
-                "content" => $_POST["content"],
-                "category_id" => $_POST["category_id"]
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+                'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
+                'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
+                'category_id' => $_POST['category_id']
             ]);
 
             if ($result) {
-                return $this->index();
+                $message = "Article publié";
+                return $this->index($message);
             }
         }
         $this->loadModel('Category');
-        $categories = $this->Category->extract("id", "title");
+        $categories = $this->Category->extract('id', 'title');
         $form = new BootstrapForm($_POST);
         $this->render('admin.post.edit', \compact('categories', 'form'));
     }
 
-    public function edit()
+    public function edit($id)
     {
         if (!empty($_POST)) {
-            $result = $this->Post->update($_GET["id"], [
-                "title" => $_POST["title"],
-                "content" => $_POST["content"],
-                "category_id" => $_POST["category_id"]
+            $result = $this->Post->update($id, [
+                'title' => $_POST['title'],
+                'content' => $_POST['content'],
+                'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
+                'category_id' => $_POST['category_id']
             ]);
 
             if ($result) {
-                return  $this->index();
+                $message = "Article modifié";
+                return $this->index($message);
             }
         }
 
-        $post = $this->Post->find($_GET["id"]);
+        $post = $this->Post->find($id);
         $this->loadModel('Category');
-        $categories = $this->Category->extract("id", "title");
+        $categories = $this->Category->extract('id', 'title');
         $form = new BootstrapForm($post);
         $this->render('admin.post.edit', \compact('categories', 'form'));
     }
 
-    public function delete()
+    public function delete($id)
     {
-        if (!empty($_POST)) {
-            $result = $this->Post->delete($_POST["id"]);
-            return $this->index();
-        }
+        $this->Post->delete($id);
+        $message = "Article supprimé";
+        return $this->index($message);
     }
 }

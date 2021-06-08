@@ -1,0 +1,17 @@
+{
+	"name": "lecheveucodeur/blog_ocr",
+	"description": "Blog OOP & MVC - Project 5 of the PHP / Symfony Application Developer formation from OpenClassRooms.",
+	"authors": [
+		{
+			"name": "leCheveuCodeur",
+			"email": "julien.jamet37pro@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"App\\": "app",
+			"Core\\": "core"
+		}
+	},
+	"require": {}
+}

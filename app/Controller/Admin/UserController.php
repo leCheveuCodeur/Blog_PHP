@@ -9,10 +9,12 @@ class UserController extends AppController
     {
         parent::__construct();
         $this->loadModel('User');
+        $this->loadModel('Comment');
     }
 
     public function index()
     {
-        $this->render('admin.user.index');
+        $comments=$this->Comment->pending();
+        $this->render('admin.user.index', \compact('comments'));
     }
 }

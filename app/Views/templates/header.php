@@ -1,5 +1,5 @@
 <header>
-    <a href="index.php" class="btn">Acceuil</a>
+    <a href="index.php" class="btn">Accueil</a>
     <?php if (isset($_SESSION['auth'])) { ?>
         <a href="?p=user.deconnect<?= \str_replace('p=', '&return=', $_SERVER['QUERY_STRING']); ?>" class="btn">Déconnexion</a>
         <?php if (isset($_SESSION['admin'])) : ?>
@@ -8,4 +8,5 @@
     <?php } else { ?>
         <a href="?p=user.login<?= \str_replace('p=', '&return=', $_SERVER['QUERY_STRING']); ?>" class="btn">Login</a>
     <?php }; ?>
+    <a href="?p=mail.contact" class="btn">Me contacter</a>
 </header>

@@ -54,7 +54,7 @@ class BootstrapForm
         $type = isset($option["type"]) ? $option["type"] : "text";
         $label = "<label for='{$name}' class='form-label'>{$label}</label>";
         if ($type === "textarea") {
-            $input = "<textarea name='{$name}' class='form-control'>{$this->getValue($name)}</textarea>";
+            $input = "<textarea name='{$name}' class='form-control' required>{$this->getValue($name)}</textarea>";
         } else {
             $input = "<input type='{$type}' name='{$name}' class='form-control' value='{$this->getValue($name)}' required>";
         }

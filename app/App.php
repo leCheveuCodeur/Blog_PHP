@@ -21,7 +21,7 @@ class App
     public static function load()
     {
         session_start();
-        require '../vendor/autoload.php';
+        require_once '../vendor/autoload.php';
     }
 
     public function getTable($name)

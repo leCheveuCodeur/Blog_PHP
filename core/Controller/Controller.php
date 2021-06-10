@@ -29,12 +29,16 @@ class Controller
         header("HTTP/1.0 403 Forbidden");
         die('Acces interdit');
         return \header('refresh:3;url=index.php');
-
     }
 
     protected function notFound()
     {
         header("HTTP/1.0 404 Not Found");
         die("Page introuvable");
+    }
+
+    protected function antiXss($input)
+    {
+        return \nl2br(\htmlspecialchars($input), ENT_QUOTES);
     }
 }

@@ -11,8 +11,8 @@
     <tbody>
         <?php foreach ($comments as $comment) : ?>
             <tr>
-                <td><?= $comment->user; ?></td>
-                <td><?= $comment->content; ?></td>
+                <td><?= $this->antiXss($comment->user); ?></td>
+                <td><?= $this->antiXss($comment->content); ?></td>
                 <td>
                     <a class="btn btn-primary" href="?p=admin.comment.edit.<?= $comment->id ?>">Approuver</a>
                     <a class="btn btn-danger" href="?p=admin.comment.delete.<?= $comment->id ?>">Supprimer</a>

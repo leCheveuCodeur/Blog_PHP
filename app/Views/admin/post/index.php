@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <td>ID</td>
+            <td>Dernière édition</td>
             <td>Titre</td>
             <td>Actions</td>
         </tr>
@@ -13,7 +14,8 @@
         <?php foreach ($posts as $post) : ?>
             <tr>
                 <td><?= $post->id; ?></td>
-                <td><?= $post->title; ?></td>
+                <td><?= 'le '.date("d/m/Y", strtotime($post->lastDate)).'<br> à '.date("H:i:s", strtotime($post->lastDate)); ?></td>
+                <td><?= $this->antiXss($post->title); ?></td>
                 <td>
                     <a class="btn btn-primary" href="?p=admin.post.edit.<?= $post->id ?>">Editer</a>
                     <a class="btn btn-danger" href="?p=admin.post.delete.<?= $post->id ?>">Supprimer</a>

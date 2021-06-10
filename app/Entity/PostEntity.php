@@ -14,7 +14,7 @@ class PostEntity extends Entity
 
     public function getExtrait()
     {
-        $html = "<p>" . \substr($this->lead, 0, 100) . "...</p>";
+        $html = "<p>" . \substr(\nl2br(\htmlspecialchars($this->leadIn)), 0, 100) . "...</p>";
         $html .= "<p><a href= " . $this->getUrl() . ">Voir la suite</a></p>";
         return $html;
     }

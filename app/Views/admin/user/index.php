@@ -1,4 +1,4 @@
-<?php if (count($comments)>0) : ?>
+<?php if (count($comments) > 0) : ?>
     <div class="alert alert-info"><?= count($comments); ?> commentaires en attentes de validation</div>
 <?php endif; ?>
 

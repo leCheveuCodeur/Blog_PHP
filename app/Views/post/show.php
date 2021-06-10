@@ -1,9 +1,11 @@
-<h1><?= $post->title; ?></h1>
+<h1><?= $this->antiXss($post->title); ?></h1>
+<p>Rédigé par <?= $this->antiXss($post->author); ?></p>
 <p><em><?= $post->category; ?></em></p>
-<p><?= $post->content; ?></p>
+<h2><?= $this->antiXss($post->leadIn); ?></h2>
+<p><?= $this->antiXss($post->content); ?></p>
 <?php foreach ($comments as $comment) : ?>
-    <p><?= $comment->content; ?>
-        par <?= $comment->user; ?>
+    <p><?= $this->antiXss($comment->content); ?>
+        par <?= $this->antiXss($comment->user); ?>
         le <?= date("d/m/Y à H:i:s", strtotime($comment->lastDate)); ?>
     </p>
 <?php endforeach; ?>

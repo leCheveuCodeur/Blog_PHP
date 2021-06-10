@@ -19,7 +19,7 @@ class PostController extends AppController
      */
     public function index(?string $message = \null)
     {
-        $posts = $this->Post->all();
+        $posts = $this->Post->lastByAuhtor($_SESSION['auth']);
         $this->render('admin.post.index', \compact('posts', 'message'));
     }
 
@@ -27,8 +27,10 @@ class PostController extends AppController
     {
         if (!empty($_POST)) {
             $result = $this->Post->create([
+                'user_id' => $_SESSION['auth'],
                 'title' => $_POST['title'],
-                'content' => $_POST['content'],
+                'leadIn' => $_POST['leadIn'],
+                'content' =>$_POST['content'],
                 'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'category_id' => $_POST['category_id']
@@ -50,6 +52,7 @@ class PostController extends AppController
         if (!empty($_POST)) {
             $result = $this->Post->update($id, [
                 'title' => $_POST['title'],
+                'leadIn' => $_POST['leadIn'],
                 'content' => $_POST['content'],
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'category_id' => $_POST['category_id']

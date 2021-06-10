@@ -2,7 +2,7 @@
     <div class="col-sm-8">
         <?php foreach ($posts as $post) : ?>
 
-            <h2><a href="<?= $post->url; ?>"><?= $post->title; ?></a></h2>
+            <h2><a href="<?= $post->url; ?>"><?= $this->antiXss($post->title); ?></a></h2>
             <p><em><?= $post->category; ?> </em></p>
 
             <p><?= $post->extrait; ?></p>

@@ -43,6 +43,10 @@ class MysqlDatabase
             return $req;
         }
 
+        if (\strpos($statement, 'COUNT(id)')) {
+            return $req->fetchColumn();
+        }
+
         if ($class_name === \null) {
             $req->setFetchMode(PDO::FETCH_OBJ);
         } else {
@@ -61,7 +65,15 @@ class MysqlDatabase
     public function prepare($statement, $attributes, $class_name = \null, $one = \false)
     {
         $req = $this->getPDO()->prepare($statement);
-        $res = $req->execute($attributes);
+        foreach ($attributes as $key => $value) {
+            if (is_int($value)) {
+                $req->bindValue($key + 1, $value, PDO::PARAM_INT);
+            } else {
+                $req->bindValue($key + 1, $value, PDO::PARAM_STR);
+            }
+        }
+        $res = $req->execute();
+
 
         if (
             \strpos($statement, "UPDATE") === 0 ||

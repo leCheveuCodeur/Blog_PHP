@@ -14,11 +14,18 @@ class PostController extends AppController
         $this->loadModel('Comment');
     }
 
-    public function index()
+    public function index(?int $page = \null)
     {
-        $posts = $this->Post->last();
+        $limit = 4;
+
+        $nbPosts = $this->Post->count();
+        $nbPages = \ceil($nbPosts / $limit);
+        $page = !empty($page) && $page <= $nbPages ? $page : 1;
+        $posts = $this->Post->paging($limit, $page);
+        $previous = $page === 1 ? ' disabled' : \null;
+        $next = $page >= $nbPages ? ' disabled' : \null;
         $categories = $this->Category->all();
-        $this->render('post.index', \compact('posts', 'categories'));
+        $this->render('post.index', \compact('page', 'posts', 'nbPosts', 'nbPages', 'previous', 'next', 'categories'));
     }
 
     public function category($postId)

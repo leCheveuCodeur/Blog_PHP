@@ -8,6 +8,23 @@
             <p><?= $post->extrait; ?></p>
 
         <?php endforeach; ?>
+
+        <?= var_dump($page); ?></br>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item<?= $previous ?>">
+                    <a class="page-link" href="?p=post.index.<?= $page - 1; ?>" aria-disabled="<?= !empty($previous) ? 'true' : '' ?>">&laquo;</a>
+                </li>
+                <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?p=post.index.<?= $i; ?>"><?= $i; ?></a>
+                    </li>
+                <?php endfor;  ?>
+                <li class="page-item<?= $next ?>">
+                    <a class="page-link" href="?p=post.index.<?= $page + 1; ?>" aria-disabled="<?= !empty($next) ? 'true' : '' ?>">&raquo;</a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <div class="col-sm-4">
         <ul>
@@ -15,6 +32,5 @@
                 <li><a href="<?= $category->url; ?>"><?= $category->title; ?></a></li>
             <?php endforeach; ?>
         </ul>
-
     </div>
 </div>

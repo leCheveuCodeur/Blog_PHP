@@ -2,6 +2,7 @@
 
 namespace App\Table;
 
+use App\Entity\PostEntity;
 use Core\Table\Table;
 use PDOException;
 
@@ -16,6 +17,22 @@ class PostTable extends Table
     {
         return $this->query(
             "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id ORDER BY p.firstDate DESC"
+        );
+    }
+
+    /**
+     * Get the last X posts
+     * @param int $limit number of post to return
+     * @param int $page current page number
+     * @return \App\Entity\PostEntity
+     * @throws PDOException
+     */
+    public function paging(int $limit, int $page)
+    {
+        $offset = strval(($page - 1) * $limit);
+        return $this->query(
+            "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id ORDER BY p.firstDate DESC LIMIT ?, ?",
+            [\intval($offset), \intval($limit)]
         );
     }
 

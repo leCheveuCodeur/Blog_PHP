@@ -14,15 +14,29 @@ class Table
 
         $this->db = $db;
         if (is_null($this->table)) {
-            $parts = explode("\\", \get_class($this));
+            $parts = explode('\\', \get_class($this));
             $class_name = \end($parts);
-            $this->table = \strtolower(\str_replace("Table", "", $class_name));
+            $this->table = \strtolower(\str_replace('Table', '', $class_name));
+        }
+    }
+
+    public function query($statement, $attributes = \null, $one = \false)
+    {
+        if ($attributes) {
+            return $this->db->prepare($statement, $attributes, \str_replace('Table', 'Entity', \get_called_class()), $one);
+        } else {
+            return $this->db->query($statement,  \str_replace('Table', 'Entity', \get_called_class()), $one);
         }
     }
 
     public function all()
     {
-        return $this->query("SELECT * FROM " . $this->table);
+        return $this->query("SELECT * FROM {$this->table}");
+    }
+
+    public function count()
+    {
+        return $this->query("SELECT COUNT(id) FROM {$this->table}");
     }
 
     public function find($id)
@@ -40,11 +54,11 @@ class Table
         $attributes = [];
 
         foreach ($fields as $k => $v) {
-            $sql_parts[] = "$k = ?";
+            $sql_parts[] = '$k = ?';
             $attributes[] = $v;
         }
 
-        $sql_part = implode(", ", $sql_parts);
+        $sql_part = implode(', ', $sql_parts);
 
         return $this->query(
             "INSERT INTO {$this->table} SET {$sql_part}",
@@ -59,12 +73,12 @@ class Table
         $attributes = [];
 
         foreach ($fields as $k => $v) {
-            $sql_parts[] = "$k = ?";
+            $sql_parts[] = '$k = ?';
             $attributes[] = $v;
         }
         $attributes[] = $id;
 
-        $sql_part = implode(", ", $sql_parts);
+        $sql_part = implode(', ', $sql_parts);
 
         return $this->query(
             "UPDATE {$this->table} SET {$sql_part} WHERE id = ?",
@@ -90,14 +104,5 @@ class Table
             $return[$v->$key] = $v->$value;
         }
         return $return;
-    }
-
-    public function query($statement, $attributes = \null, $one = \false)
-    {
-        if ($attributes) {
-            return $this->db->prepare($statement, $attributes, \str_replace("Table", "Entity", \get_called_class()), $one);
-        } else {
-            return $this->db->query($statement,  \str_replace("Table", "Entity", \get_called_class()), $one);
-        }
     }
 }

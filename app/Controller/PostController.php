@@ -25,7 +25,7 @@ class PostController extends AppController
         $previous = $page === 1 ? ' disabled' : \null;
         $next = $page >= $nbPages ? ' disabled' : \null;
         $categories = $this->Category->all();
-        $this->render('post.index', \compact('page', 'posts', 'nbPosts', 'nbPages', 'previous', 'next', 'categories'));
+        $this->render('post.index', \compact( 'page', 'posts', 'nbPosts', 'nbPages', 'previous', 'next', 'categories'));
     }
 
     public function category($postId)

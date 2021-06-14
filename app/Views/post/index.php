@@ -9,14 +9,13 @@
 
         <?php endforeach; ?>
 
-        <?= var_dump($page); ?></br>
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li class="page-item<?= $previous ?>">
                     <a class="page-link" href="?p=post.index.<?= $page - 1; ?>" aria-disabled="<?= !empty($previous) ? 'true' : '' ?>">&laquo;</a>
                 </li>
                 <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
-                    <li class="page-item">
+                    <li class="page-item <?= $i == $page ? ' active' : null; ?>" <?= $i == $page ? ' arria-current="page"' : null ?>>
                         <a class="page-link" href="?p=post.index.<?= $i; ?>"><?= $i; ?></a>
                     </li>
                 <?php endfor;  ?>

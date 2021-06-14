@@ -54,7 +54,7 @@ class Table
         $attributes = [];
 
         foreach ($fields as $k => $v) {
-            $sql_parts[] = '$k = ?';
+            $sql_parts[] = "$k = ?";
             $attributes[] = $v;
         }
 
@@ -73,7 +73,7 @@ class Table
         $attributes = [];
 
         foreach ($fields as $k => $v) {
-            $sql_parts[] = '$k = ?';
+            $sql_parts[] = "$k = ?";
             $attributes[] = $v;
         }
         $attributes[] = $id;

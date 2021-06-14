@@ -51,12 +51,13 @@ class BootstrapForm
      */
     public function input(string $name, string $label, array $option = [])
     {
-        $type = isset($option["type"]) ? $option["type"] : "text";
+        $type = !empty($option["type"]) ? $option["type"] : "text";
+        $maxlength = !empty($option["maxlength"]) ? "maxlength='{$option['maxlength']}'" : \null;
         $label = "<label for='{$name}' class='form-label'>{$label}</label>";
         if ($type === "textarea") {
             $input = "<textarea name='{$name}' class='form-control' required>{$this->getValue($name)}</textarea>";
         } else {
-            $input = "<input type='{$type}' name='{$name}' class='form-control' value='{$this->getValue($name)}' required>";
+            $input = "<input type='{$type}' name='{$name}' class='form-control' value='{$this->getValue($name)}' {$maxlength} required>";
         }
 
         return $this->surround($label . $input);

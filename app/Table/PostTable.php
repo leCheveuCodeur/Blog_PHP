@@ -39,10 +39,9 @@ class PostTable extends Table
      */
     public function lastByAuhtor($user_id)
     {
-        return $this->query(
-            "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.user_id = ? ORDER BY p.firstDate DESC",
-            [$user_id]
-        );
+        $statement = "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.user_id = ? ORDER BY p.firstDate DESC";
+        $attributes = [$user_id];
+        return \compact('statement', 'attributes');
     }
 
     /**

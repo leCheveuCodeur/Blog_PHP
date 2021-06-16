@@ -22,8 +22,8 @@ class Controller
      */
     protected function tableName()
     {
-        $path = \explode('\\', \get_called_class());
-        return $tableName = \str_replace('Controller', '', $path[2]);
+        \preg_match('/[\w\-\_]+(?=Controller)/im', \get_called_class(), $tableName);
+        return $tableName[0];
     }
 
     protected function previousPage()

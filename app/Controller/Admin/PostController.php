@@ -17,10 +17,14 @@ class PostController extends AppController
      * @param null|string $message
      * @return void
      */
-    public function index(?string $message = \null)
+    public function index(?int $page = \null, ?string $message = \null)
     {
-        $posts = $this->Post->lastByAuhtor($_SESSION['auth']);
-        $this->render('admin.post.index', \compact('posts', 'message'));
+        $limit = 2;
+
+        \extract($this->Post->lastByAuhtor($_SESSION['auth']));
+        \extract($this->paging($page, $statement, $limit, $attributes));
+
+        $this->render('admin.post.index', \compact('page', 'posts', 'message', 'nbPages', 'previous', 'next'));
     }
 
     public function add()
@@ -30,7 +34,7 @@ class PostController extends AppController
                 'user_id' => $_SESSION['auth'],
                 'title' => $_POST['title'],
                 'leadIn' => $_POST['leadIn'],
-                'content' =>$_POST['content'],
+                'content' => $_POST['content'],
                 'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'category_id' => $_POST['category_id']

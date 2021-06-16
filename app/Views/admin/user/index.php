@@ -1,5 +1,5 @@
 <?php if (count($comments) > 0) : ?>
-    <div class="alert alert-info"><?= count($comments); ?> commentaires en attentes de validation</div>
+    <div class="alert alert-info"><?= count($comments); ?> commentaire<?= count($comments) > 1 ? 's' : ''; ?> en attente<?= count($comments) > 1 ? 's' : ''; ?> de validation</div>
 <?php endif; ?>
 
 <h1>Gestion du blog</h1>

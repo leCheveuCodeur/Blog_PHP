@@ -20,6 +20,13 @@ class CommentTable extends Table
         );
     }
 
+    public function alert()
+    {
+        return $this->query(
+            'SELECT c.id, c.content, c.lastDate lastDate, u.username user FROM comment c LEFT JOIN user u ON u.id = c.user_id WHERE c.approved = 0 ORDER BY lastDate DESC'
+        );
+    }
+
     public function pending()
     {
         $statement = ' SELECT c.id, c.content, c.lastDate lastDate, u.username user FROM comment c LEFT JOIN user u ON u.id = c.user_id WHERE c.approved = 0 ORDER BY lastDate ASC';

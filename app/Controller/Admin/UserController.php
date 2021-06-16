@@ -14,7 +14,7 @@ class UserController extends AppController
 
     public function index()
     {
-        $comments=$this->Comment->pending();
+        $comments=$this->Comment->alert();
         $this->render('admin.user.index', \compact('comments'));
     }
 }

@@ -37,14 +37,13 @@ class Controller
     protected function forbidden()
     {
         header("HTTP/1.0 403 Forbidden");
-        die('Acces interdit');
-        return \header('refresh:3;url=index.php');
+        return \header('Location: index.php?p=user.login');
     }
 
     protected function notFound()
     {
         header("HTTP/1.0 404 Not Found");
-        die("Page introuvable");
+        return \header('Location: index.php');
     }
 
     protected function antiXss($input)

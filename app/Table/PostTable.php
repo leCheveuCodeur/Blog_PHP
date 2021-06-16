@@ -2,7 +2,6 @@
 
 namespace App\Table;
 
-use App\Entity\PostEntity;
 use Core\Table\Table;
 use PDOException;
 
@@ -15,25 +14,21 @@ class PostTable extends Table
      */
     public function last()
     {
-        return $this->query(
-            "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id ORDER BY p.firstDate DESC"
-        );
+        $statement = "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id ORDER BY p.firstDate DESC";
+        return \compact('statement');
     }
 
     /**
-     * Get the last X posts
-     * @param int $limit number of post to return
-     * @param int $page current page number
+     * Récupère les derniers post de la catégorie demandé
+     * @param int $category_id
      * @return \App\Entity\PostEntity
      * @throws PDOException
      */
-    public function paging(int $limit, int $page)
+    public function lastByCategory($category_id)
     {
-        $offset = strval(($page - 1) * $limit);
-        return $this->query(
-            "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id ORDER BY p.firstDate DESC LIMIT ?, ?",
-            [\intval($offset), \intval($limit)]
-        );
+        $statement = "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.category_id = ? ORDER BY p.firstDate DESC";
+        $attributes = [$category_id];
+        return \compact('statement', 'attributes');
     }
 
     /**
@@ -62,20 +57,6 @@ class PostTable extends Table
             "SELECT p.id, p.title,p.leadIn, p.content, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.id = ?",
             [$id],
             \true
-        );
-    }
-
-    /**
-     * Récupère les derniers post de la catégorie demandé
-     * @param int $category_id
-     * @return \App\Entity\PostEntity
-     * @throws PDOException
-     */
-    public function lastByCategory($category_id)
-    {
-        return $this->query(
-            "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.category_id = ? ORDER BY p.firstDate DESC",
-            [$category_id]
         );
     }
 }

@@ -3,6 +3,7 @@
 namespace Core\Table;
 
 use Core\Database\MysqlDatabase;
+use PDOException;
 
 class Table
 {
@@ -34,9 +35,21 @@ class Table
         return $this->query("SELECT * FROM {$this->table}");
     }
 
-    public function count()
+    /**
+     * Counts the number of rows in a table
+     * @param null|string $statement
+     * @param null|array $attributes
+     * @return int
+     * @throws PDOException
+     */
+    public function countRows(?string $statement = \null, ?array $attributes = \null): int
     {
-        return $this->query("SELECT COUNT(id) FROM {$this->table}");
+        if (!empty($statement)) {
+            $statement = \preg_replace('/SELECT.*FROM/im', 'SELECT COUNT(p.id) FROM', $statement);
+        }
+        $statement = empty($statement) ? "SELECT COUNT(id) FROM {$this->table}" : $statement;
+
+        return $this->query($statement, $attributes);
     }
 
     public function find($id)
@@ -47,6 +60,26 @@ class Table
             \true
         );
     }
+
+    /**
+     * Get the last X rows
+     * @param int $limit number of post to return
+     * @param int $page current page number
+     * @return \App\Entity\PostEntity
+     * @throws PDOException
+     */
+    public function offset(string $statement, ?array $attributes = [], int $limit, int $page)
+    {
+        $offset = strval(($page - 1) * $limit);
+        $attributes[] = \intval($offset);
+        $attributes[] = \intval($limit);
+
+        return $this->query(
+            $statement . " LIMIT ?, ?",
+            $attributes
+        );
+    }
+
 
     public function create($fields)
     {

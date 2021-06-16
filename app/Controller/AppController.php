@@ -8,10 +8,12 @@ use Core\Controller\Controller;
 class AppController extends Controller
 {
     protected $template = 'default';
+    protected $table;
 
     public function __construct()
     {
         $this->viewPath = \ROOT . '/app/Views/';
+        $this->table = $this->tableName();
     }
 
     protected function loadModel($model_name)

@@ -43,7 +43,7 @@ class MysqlDatabase
             return $req;
         }
 
-        if (\strpos($statement, 'COUNT(id)')) {
+        if (\strpos($statement, 'COUNT')) {
             return $req->fetchColumn();
         }
 
@@ -81,6 +81,10 @@ class MysqlDatabase
             \strpos($statement, "DELETE") === 0
         ) {
             return $res;
+        }
+
+        if (\strpos($statement, 'COUNT')) {
+            return $req->fetchColumn();
         }
 
         if ($class_name === \null) {

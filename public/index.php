@@ -20,6 +20,10 @@ if ($page[0] === 'admin') {
     $controller = '\App\Controller\\' . ucfirst($page[0]) . 'Controller';
     $action = $page[1];
     $id = isset($page[2]) ? $page[2] : null;
+    $paging = isset($page[3]) ? $page[3] : null;
 }
 $controller = new $controller;
-isset($id) ? $controller->$action($id) : $controller->$action();
+if (isset($id) && isset($paging)) {
+    return $controller->$action($id, $paging);
+}
+return isset($id) ? $controller->$action($id) : $controller->$action();

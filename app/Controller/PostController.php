@@ -18,27 +18,27 @@ class PostController extends AppController
     {
         $limit = 4;
 
-        $nbPosts = $this->Post->count();
-        $nbPages = \ceil($nbPosts / $limit);
-        $page = !empty($page) && $page <= $nbPages ? $page : 1;
-        $posts = $this->Post->paging($limit, $page);
-        $previous = $page === 1 ? ' disabled' : \null;
-        $next = $page >= $nbPages ? ' disabled' : \null;
+        \extract($this->Post->last());
+        \extract($this->paging($page, $statement, $limit));
+
         $categories = $this->Category->all();
-        $this->render('post.index', \compact( 'page', 'posts', 'nbPosts', 'nbPages', 'previous', 'next', 'categories'));
+        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories'));
     }
 
-    public function category($postId)
+    public function category(int $category_id, ?int $page = \null)
     {
-        $category =  $this->Category->find($postId);
+        $limit = 2;
 
+        $category =  $this->Category->find($category_id);
         if ($category === false) {
             $this->notFound();
         }
 
-        $posts = $this->Post->lastByCategory($postId);
+        \extract($this->Post->lastByCategory($category_id));
+        \extract($this->paging($page, $statement, $limit, $attributes));
+
         $categories = $this->Category->all();
-        $this->render('post.category', \compact('posts', 'categories', 'category'));
+        $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category'));
     }
 
     public function show($postId)

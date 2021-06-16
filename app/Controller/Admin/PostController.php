@@ -64,7 +64,7 @@ class PostController extends AppController
 
             if ($result) {
                 $message = "Article modifié";
-                return $this->index($message);
+                return $this->index(null, $message);
             }
         }
 
@@ -79,6 +79,6 @@ class PostController extends AppController
     {
         $this->Post->delete($id);
         $message = "Article supprimé";
-        return $this->index($message);
+        return $this->index(null, $message);
     }
 }

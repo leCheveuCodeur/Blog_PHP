@@ -16,7 +16,7 @@ class CategoryController extends AppController
     {
         $limit = 2;
 
-        \extract($this->Category->all());
+        \extract($this->Category->list());
         \extract($this->paging($page, $statement, $limit));
 
         $this->render('admin.category.index', \compact('page', 'categorys', 'nbPages', 'previous', 'next'));

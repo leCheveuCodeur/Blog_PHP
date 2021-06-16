@@ -10,10 +10,14 @@ class CommentController extends AppController
         $this->loadModel('Comment');
     }
 
-    public function index()
+    public function index(?int $page = \null)
     {
-        $comments = $this->Comment->pending();
-        $this->render('admin.comment.index', \compact('comments'));
+        $limit = 1;
+
+        \extract($this->Comment->pending());
+        \extract($this->paging($page, $statement, $limit));
+
+        $this->render('admin.comment.index', compact('page', 'comments', 'nbPages', 'previous', 'next'));
     }
 
     public function edit($id)

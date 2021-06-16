@@ -21,7 +21,7 @@ class PostController extends AppController
         \extract($this->Post->last());
         \extract($this->paging($page, $statement, $limit));
 
-        $categories = $this->Category->all();
+        $categories = $this->Category->onlyWithPosts();
         $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories'));
     }
 
@@ -37,7 +37,7 @@ class PostController extends AppController
         \extract($this->Post->lastByCategory($category_id));
         \extract($this->paging($page, $statement, $limit, $attributes));
 
-        $categories = $this->Category->all();
+        $categories = $this->Category->onlyWithPosts();
         $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category'));
     }
 

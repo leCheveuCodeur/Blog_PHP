@@ -42,7 +42,7 @@ class PostController extends AppController
 
             if ($result) {
                 $message = "Article publié";
-                return $this->index($message);
+                return $this->index(null,$message);
             }
         }
         $this->loadModel('Category');

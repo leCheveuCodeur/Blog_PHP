@@ -10,14 +10,14 @@ class CommentController extends AppController
         $this->loadModel('Comment');
     }
 
-    public function index(?int $page = \null)
+    public function index(?int $page = \null, ?string $message = \null)
     {
-        $limit = 1;
+        $limit = 10;
 
         \extract($this->Comment->pending());
         \extract($this->paging($page, $statement, $limit));
 
-        $this->render('admin.comment.index', compact('page', 'comments', 'nbPages', 'previous', 'next'));
+        $this->render('admin.comment.index', compact('page', 'message', 'comments', 'nbPages', 'previous', 'next'));
     }
 
     public function edit($id)
@@ -25,12 +25,14 @@ class CommentController extends AppController
         $this->Comment->update($id, [
             'approved' => 1
         ]);
-        return \header('Location: index.php?p=admin.comment.index');
+        $message = "Commentaire validé";
+        return $this->index(null, $message);
     }
 
     public function delete($id)
     {
         $this->Comment->delete($id);
-        return \header('Location: index.php?p=admin.comment.index');
+        $message = "Commentaire supprimé";
+        return $this->index(null, $message);
     }
 }

@@ -12,14 +12,14 @@ class CategoryController extends AppController
         $this->loadModel('Category');
     }
 
-    public function index(?int $page = \null)
+    public function index(?int $page = \null, ?string $message = \null)
     {
         $limit = 2;
 
         \extract($this->Category->list());
         \extract($this->paging($page, $statement, $limit));
 
-        $this->render('admin.category.index', \compact('page', 'categorys', 'nbPages', 'previous', 'next'));
+        $this->render('admin.category.index', \compact('page', 'categorys', 'message', 'nbPages', 'previous', 'next'));
     }
 
     public function add()
@@ -29,7 +29,10 @@ class CategoryController extends AppController
                 "title" => $_POST["title"]
             ]);
 
-            return $this->index();
+            if ($result) {
+                $message = "Catégorie ajoutée";
+                return $this->index(null, $message);
+            }
         }
 
         $form = new BootstrapForm($_POST);
@@ -43,7 +46,10 @@ class CategoryController extends AppController
                 "title" => $_POST["title"]
             ]);
 
-            return  $this->index();
+            if ($result) {
+                $message = "Catégorie modifiée";
+                return $this->index(null, $message);
+            }
         }
 
         $category = $this->Category->find($id);
@@ -54,6 +60,7 @@ class CategoryController extends AppController
     public function delete($id)
     {
         $this->Category->delete($id);
-        return \header('Location: index.php?p=admin.category.index');
+        $message = "Catégorie supprimée";
+        return $this->index(null, $message);
     }
 }

@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($items as $category) : ?>
+        <?php foreach ($categorys as $category) : ?>
             <tr>
                 <td><?= $category->id; ?></td>
                 <td><?= $category->title; ?></td>
@@ -22,3 +22,19 @@
         <?php endforeach ?>
     </tbody>
 </table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item<?= $previous ?>">
+            <a class="page-link" href="?p=admin.category.index.<?= $page - 1; ?>" aria-disabled="<?= !empty($previous) ? 'true' : '' ?>">&laquo;</a>
+        </li>
+        <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
+            <li class="page-item <?= $i == $page ? ' active' : null; ?>" <?= $i == $page ? ' arria-current="page"' : null ?>>
+                <a class="page-link" href="?p=admin.category.index.<?= $i; ?>"><?= $i; ?></a>
+            </li>
+        <?php endfor;  ?>
+        <li class="page-item<?= $next ?>">
+            <a class="page-link" href="?p=admin.category.index.<?= $page + 1; ?>" aria-disabled="<?= !empty($next) ? 'true' : '' ?>">&raquo;</a>
+        </li>
+    </ul>
+</nav>

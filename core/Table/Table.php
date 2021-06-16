@@ -45,7 +45,7 @@ class Table
     public function countRows(?string $statement = \null, ?array $attributes = \null): int
     {
         if (!empty($statement)) {
-            $statement = \preg_replace('/SELECT.*FROM/im', 'SELECT COUNT(p.id) FROM', $statement);
+            $statement = \preg_replace('/SELECT.*FROM/im', "SELECT COUNT({$this->table[0]}.id) FROM", $statement);
         }
         $statement = empty($statement) ? "SELECT COUNT(id) FROM {$this->table}" : $statement;
 

@@ -12,10 +12,14 @@ class CategoryController extends AppController
         $this->loadModel('Category');
     }
 
-    public function index()
+    public function index(?int $page = \null)
     {
-        $items = $this->Category->all();
-        $this->render('admin.category.index', \compact('items'));
+        $limit = 2;
+
+        \extract($this->Category->all());
+        \extract($this->paging($page, $statement, $limit));
+
+        $this->render('admin.category.index', \compact('page', 'categorys', 'nbPages', 'previous', 'next'));
     }
 
     public function add()

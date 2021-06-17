@@ -12,6 +12,10 @@ class UserController extends AppController
         $this->loadModel('Comment');
     }
 
+    /**
+     * Display of the connected User's dashboard
+     * @return void 
+     */
     public function index()
     {
         $comments=$this->Comment->alert();

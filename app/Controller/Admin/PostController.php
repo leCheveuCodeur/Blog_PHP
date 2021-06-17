@@ -13,12 +13,13 @@ class PostController extends AppController
     }
 
     /**
-     *
-     * @param null|string $message
+     * Display of all Posts of the connected User
+     * @param null|string $message for validation
      * @return void
      */
     public function index(?int $page = \null, ?string $message = \null)
     {
+        // Set the number of posts per page
         $limit = 2;
 
         \extract($this->Post->lastByAuhtor($_SESSION['auth']));
@@ -27,6 +28,10 @@ class PostController extends AppController
         $this->render('admin.post.index', \compact('page', 'posts', 'message', 'nbPages', 'previous', 'next'));
     }
 
+    /**
+     * Displaying the view to add a Post
+     * @return void
+     */
     public function add()
     {
         if (!empty($_POST)) {
@@ -42,7 +47,7 @@ class PostController extends AppController
 
             if ($result) {
                 $message = "Article publié";
-                return $this->index(null,$message);
+                return $this->index(null, $message);
             }
         }
         $this->loadModel('Category');
@@ -51,7 +56,12 @@ class PostController extends AppController
         $this->render('admin.post.edit', \compact('categories', 'form'));
     }
 
-    public function edit($id)
+    /**
+     * Displaying the view to modify a Post
+     * @param int $id
+     * @return void
+     */
+    public function edit(int $id)
     {
         if (!empty($_POST)) {
             $result = $this->Post->update($id, [
@@ -75,7 +85,12 @@ class PostController extends AppController
         $this->render('admin.post.edit', \compact('categories', 'form'));
     }
 
-    public function delete($id)
+    /**
+     * Delete a Post
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id)
     {
         $this->Post->delete($id);
         $message = "Article supprimé";

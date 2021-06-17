@@ -14,6 +14,10 @@ class DBAuth
         $this->db = $db;
     }
 
+    /**
+     * Returns the Id of the connected User
+     * @return mixed $id|false
+     */
     public function getUserId()
     {
         if ($this->logged()) {
@@ -23,14 +27,15 @@ class DBAuth
     }
 
     /**
-     * @param mixed $usernameOrEmail
-     * @param mixed $password
-     * @return mixed
+     * Check the login
+     * @param string $usernameOrEmail
+     * @param string $password
+     * @return bool
      * @throws PDOException
      */
-    public function login($usernameOrEmail, $password)
+    public function login(string $usernameOrEmail, string $password)
     {
-        $user = $this->db->prepare("SELECT * FROM user WHERE username = ? or email = ?", [$usernameOrEmail,$usernameOrEmail], \null, \true);
+        $user = $this->db->prepare("SELECT * FROM user WHERE username = ? or email = ?", [$usernameOrEmail, $usernameOrEmail], \null, \true);
         if ($user) {
             if (\password_verify($password, $user->password)) {
                 $_SESSION["auth"] = $user->id;
@@ -41,6 +46,10 @@ class DBAuth
         return \false;
     }
 
+    /**
+     * Checks if the Visitor is logged 
+     * @return bool 
+     */
     public function logged()
     {
         return isset($_SESSION["auth"]);

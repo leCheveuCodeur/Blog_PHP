@@ -3,6 +3,7 @@
 namespace Core\Database;
 
 use PDO;
+use PDOException;
 
 class MysqlDatabase
 {
@@ -13,7 +14,15 @@ class MysqlDatabase
     private $pdo;
 
 
-    public function __construct($db_name, $db_user = "root", $db_pass = "", $db_host = "localhost")
+    /**
+     * Construct - set the environment variables
+     * @param string $db_name
+     * @param string $db_user
+     * @param string $db_pass
+     * @param string $db_host
+     * @return void
+     */
+    public function __construct(string $db_name, string $db_user = "root", string $db_pass = "", string $db_host = "localhost")
     {
         $this->db_name = $db_name;
         $this->db_user = $db_user;
@@ -21,17 +30,28 @@ class MysqlDatabase
         $this->db_host = $db_host;
     }
 
+    /**
+     * Get PDO - connect to the server
+     * @return PDO
+     */
     private function getPDO()
     {
         if ($this->pdo === \null) {
-            $pdo = new PDO("mysql:dbname=blog;host=localhost", "root", "");
+            $pdo = new PDO("mysql:dbname={$this->db_name};host={$this->db_host}", $this->db_user, $this->db_pass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
         }
         return $this->pdo;
     }
 
-    public function query($statement, $class_name = \null, $one = \false)
+    /**
+     * Query - auto manages the fetch mode & type
+     * @param string $statement
+     * @param null|string $class_name
+     * @param null|bool $one
+     * @return mixed
+     */
+    public function query(string $statement, ?string $class_name = \null, ?bool $one = \false)
     {
         $req = $this->getPDO()->query($statement);
 
@@ -62,7 +82,16 @@ class MysqlDatabase
         return $datas;
     }
 
-    public function prepare($statement, $attributes, $class_name = \null, $one = \false)
+    /**
+     * Prepare - auto manages the fetch mode & type
+     * @param string $statement
+     * @param array $attributes
+     * @param null|string $class_name
+     * @param null|bool $one
+     * @return mixed
+     * @throws PDOException
+     */
+    public function prepare(string $statement, array $attributes, ?string $class_name = \null, ?bool $one = \false)
     {
         $req = $this->getPDO()->prepare($statement);
         foreach ($attributes as $key => $value) {
@@ -99,10 +128,5 @@ class MysqlDatabase
             $datas = $req->fetchAll();
         }
         return $datas;
-    }
-
-    public function lastInsertId()
-    {
-        return $this->getPDO()->lastInsertId();
     }
 }

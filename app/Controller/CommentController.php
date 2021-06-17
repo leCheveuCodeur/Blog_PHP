@@ -10,12 +10,17 @@ class CommentController extends AppController
         $this->loadModel('Comment');
     }
 
-    public function add($id)
+    /**
+     * Display the view to submit a comment
+     * @param int $id 
+     * @return void 
+     */
+    public function add(int $id)
     {
         if (!empty($_POST) && !empty($_SESSION)) {
             $comment = $this->Comment->create([
                 'content' => $_POST['content'],
-                'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2), //TODO voir pour améliorée la datation en la rendant international et adpater à l'utilisateur
+                'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'user_id' => $_SESSION['auth'],
                 'post_id' => $id

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Core\Config;
 use Core\HTML\BootstrapForm;
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
@@ -17,6 +18,11 @@ class MailController extends AppController
         $this->initMail();
     }
 
+    /**
+     * Initiate a Mail object
+     * @return void
+     * @throws Exception
+     */
     private function initMail()
     {
         $config = Config::getInstance(ROOT . '/config/config.php');
@@ -40,7 +46,10 @@ class MailController extends AppController
         $this->mail->addAddress($config->get('mail_address'));
     }
 
-
+/**
+ * Displays the Contact view and generates the Mail sending
+ * @return void 
+ */
     public function contact()
     {
         $errors = '';

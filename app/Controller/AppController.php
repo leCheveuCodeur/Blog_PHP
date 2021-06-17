@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App;
+use Core\Auth\DBAuth;
 use Core\Controller\Controller;
 
 class AppController extends Controller
@@ -16,8 +17,16 @@ class AppController extends Controller
         $this->table = $this->tableName();
     }
 
-    protected function loadModel($model_name)
+/**
+ * Return the searched Table
+ * @param string $model_name
+ * @return mixed
+ */
+    protected function loadModel(string $model_name)
     {
-        $this->$model_name = App::getInstance()->getTable($model_name);
+        if (empty($this->$model_name)) {
+            $this->$model_name = App::getInstance()->getTable($model_name);
+        }
+        return $this->$model_name;
     }
 }

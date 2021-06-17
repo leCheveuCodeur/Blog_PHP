@@ -5,6 +5,8 @@ namespace App\Controller;
 use App;
 use Core\Auth\DBAuth;
 use Core\HTML\BootstrapForm;
+use Exception;
+use PDOException;
 
 class UserController extends AppController
 {
@@ -14,15 +16,20 @@ class UserController extends AppController
         $this->loadModel('User');
     }
 
+    /**
+     * Verify the login
+     * @return void
+     * @throws PDOException
+     */
     public function login()
     {
         $errors = \false;
         if (!empty($_POST)) {
             $auth = new DBAuth(App::getInstance()->getDb());
-            if ($auth->login($_POST["usernameOrEmail"], $_POST["password"])) {
+            if ($auth->login($_POST['usernameOrEmail'], $_POST['password'])) {
                 $this->previousPage();
             } else {
-                $errors = "Identifiants incorrect";
+                $errors = 'Identifiants incorrect';
             }
         }
 
@@ -30,23 +37,31 @@ class UserController extends AppController
         $this->render('user.login', \compact('form', 'errors'));
     }
 
+    /**
+     * Adding a new User
+     * @return void
+     */
     public function add()
     {
         $errors = \false;
         if (!empty($_POST)) {
             if ($_POST['password'] !== $_POST['password2']) {
-                $errors = "Mot de passe incorrect";
+                $errors = 'Mot de passe incorrect';
             } else {
                 $passwordHash = \password_hash($_POST['password'], \PASSWORD_DEFAULT);
 
-                $user = $this->User->create([
-                    "username" => $_POST["username"],
-                    "email" => $_POST["email"],
-                    "password" => $passwordHash
-                ]);
+                try {
+                    $user = $this->User->create([
+                        'username' => $_POST['username'],
+                        'email' => $_POST['email'],
+                        'password' => $passwordHash
+                    ]);
+                } catch (Exception $errors) {
+                    $errors = 'Pseudo ou Email deja utilisé, veuillez changer';
+                }
 
-                if ($user) {
-                    $this->previousPage();
+                if ($errors === \false) {
+                    return $this->previousPage();
                 }
             }
         }
@@ -55,6 +70,10 @@ class UserController extends AppController
         $this->render('user.add', \compact('form', 'errors'));
     }
 
+    /**
+     * User logout
+     * @return void
+     */
     public function deconnect()
     {
         \session_destroy();

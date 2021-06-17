@@ -8,9 +8,8 @@ use PDOException;
 class PostTable extends Table
 {
     /**
-     * Récupère les derniers post
-     * @return \App\Entity\PostEntity
-     * @throws PDOException
+     * Statement to get the last posts
+     * @return array with the \compat function | !! use \extract to retrieve
      */
     public function last()
     {
@@ -19,12 +18,11 @@ class PostTable extends Table
     }
 
     /**
-     * Récupère les derniers post de la catégorie demandé
+     * Statement to retrieves the last posts of the requested category
      * @param int $category_id
-     * @return \App\Entity\PostEntity
-     * @throws PDOException
+     * @return array with the \compat function | !! use \extract to retrieve
      */
-    public function lastByCategory($category_id)
+    public function lastByCategory(int $category_id)
     {
         $statement = "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.category_id = ? ORDER BY p.firstDate DESC";
         $attributes = [$category_id];
@@ -32,12 +30,11 @@ class PostTable extends Table
     }
 
     /**
-     * Récupère les derniers post de l'Auteur demandé
+     * Statement to get the last posts of the requested Author
      * @param int $user_id
-     * @return \App\Entity\PostEntity
-     * @throws PDOException
+     * @return array with the \compat function | !! use \extract to retrieve
      */
-    public function lastByAuhtor($user_id)
+    public function lastByAuhtor(int $user_id)
     {
         $statement = "SELECT p.id, p.title,p.leadIn, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.user_id = ? ORDER BY p.firstDate DESC";
         $attributes = [$user_id];
@@ -45,12 +42,12 @@ class PostTable extends Table
     }
 
     /**
-     * Récupère un acticle en liant la catégorie associée
+     * Retrieves an article by linking the associated category
      * @param int $id
-     * @return \App\Entity\PostEntity
+     * @return object PDOStatement::fetchObject
      * @throws PDOException
      */
-    public function findWithCategory($id)
+    public function findWithCategory(int $id)
     {
         return $this->query(
             "SELECT p.id, p.title,p.leadIn, p.content, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.id = ?",

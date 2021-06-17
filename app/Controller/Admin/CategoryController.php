@@ -12,8 +12,15 @@ class CategoryController extends AppController
         $this->loadModel('Category');
     }
 
+    /**
+     *  Displaying Categories
+     * @param null|int $page
+     * @param null|string $message
+     * @return void
+     */
     public function index(?int $page = \null, ?string $message = \null)
     {
+        // Set the number of categories per page
         $limit = 2;
 
         \extract($this->Category->list());
@@ -22,6 +29,10 @@ class CategoryController extends AppController
         $this->render('admin.category.index', \compact('page', 'categorys', 'message', 'nbPages', 'previous', 'next'));
     }
 
+    /**
+     * Displaying the view to add a Category
+     * @return void
+     */
     public function add()
     {
         if (!empty($_POST)) {
@@ -39,7 +50,12 @@ class CategoryController extends AppController
         $this->render('admin.category.edit', \compact('form'));
     }
 
-    public function edit($id)
+    /**
+     * Displaying the view to modify a Category
+     * @param int $id
+     * @return void
+     */
+    public function edit(int $id)
     {
         if (!empty($_POST)) {
             $result = $this->Category->update($id, [
@@ -57,6 +73,11 @@ class CategoryController extends AppController
         $this->render('admin.category.edit', \compact('form'));
     }
 
+    /**
+     * Delete a Category
+     * @param mixed $id
+     * @return void
+     */
     public function delete($id)
     {
         $this->Category->delete($id);

@@ -7,7 +7,13 @@ class Controller
     protected $viewPath;
     protected $template;
 
-    protected function render($view, $variables = [])
+    /**
+     * Sends to the targeted View and sends the $variables
+     * @param string $view ex: table.methode.attributs - 'post.show.1'
+     * @param array $variables
+     * @return void
+     */
+    protected function render(string $view, array $variables = [])
     {
         \ob_start();
         \extract($variables);
@@ -26,6 +32,10 @@ class Controller
         return $tableName[0];
     }
 
+    /**
+     * Return to the previous page
+     * @return void
+     */
     protected function previousPage()
     {
         if (isset($_GET['return'])) {
@@ -34,19 +44,32 @@ class Controller
         return \header('Location: index.php');
     }
 
+    /**
+     * Management in the event of an error HTTP 403
+     * @return void
+     */
     protected function forbidden()
     {
         header("HTTP/1.0 403 Forbidden");
         return \header('Location: index.php?p=user.login');
     }
 
+    /**
+     * Management in the event of an error 404
+     * @return void
+     */
     protected function notFound()
     {
         header("HTTP/1.0 404 Not Found");
         return \header('Location: index.php');
     }
 
-    protected function antiXss($input)
+    /**
+     * Add an XSS filter on the displayed datas
+     * @param string $input 
+     * @return string 
+     */
+    protected function antiXss(string $input)
     {
         return \nl2br(\htmlspecialchars($input), ENT_QUOTES);
     }

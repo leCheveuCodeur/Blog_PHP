@@ -10,8 +10,15 @@ class CommentController extends AppController
         $this->loadModel('Comment');
     }
 
+    /**
+     * Display of Comments pending validation
+     * @param null|int $page
+     * @param null|string $message
+     * @return void
+     */
     public function index(?int $page = \null, ?string $message = \null)
     {
+        // Set the number of comments per page
         $limit = 10;
 
         \extract($this->Comment->pending());
@@ -20,7 +27,12 @@ class CommentController extends AppController
         $this->render('admin.comment.index', compact('page', 'message', 'comments', 'nbPages', 'previous', 'next'));
     }
 
-    public function edit($id)
+    /**
+     * Comment validation
+     * @param int $id
+     * @return void
+     */
+    public function edit(int $id)
     {
         $this->Comment->update($id, [
             'approved' => 1
@@ -29,7 +41,12 @@ class CommentController extends AppController
         return $this->index(null, $message);
     }
 
-    public function delete($id)
+    /**
+     * Delete a Comment
+     * @param int $id 
+     * @return void 
+     */
+    public function delete(int $id)
     {
         $this->Comment->delete($id);
         $message = "Commentaire supprimé";

@@ -12,7 +12,6 @@ class Table
 
     public function __construct(MysqlDatabase $db)
     {
-
         $this->db = $db;
         if (is_null($this->table)) {
             $parts = explode('\\', \get_class($this));
@@ -21,7 +20,15 @@ class Table
         }
     }
 
-    public function query($statement, $attributes = \null, $one = \false)
+    /**
+     * Simplifies SQL query preparation
+     * @param string $statement
+     * @param null|array $attributes
+     * @param null|bool $one
+     * @return mixed
+     * @throws PDOException
+     */
+    public function query(string $statement, ?array $attributes = \null, ?bool $one = \false)
     {
         if ($attributes) {
             return $this->db->prepare($statement, $attributes, \str_replace('Table', 'Entity', \get_called_class()), $one);
@@ -30,6 +37,11 @@ class Table
         }
     }
 
+    /**
+     * Fetches all the elements of a Table
+     * @return mixed
+     * @throws PDOException
+     */
     public function all()
     {
         return $this->query("SELECT * FROM {$this->table}");
@@ -52,7 +64,13 @@ class Table
         return $this->query($statement, $attributes);
     }
 
-    public function find($id)
+    /**
+     * Fetch one element from a Table
+     * @param int $id
+     * @return mixed
+     * @throws PDOException
+     */
+    public function find(int $id)
     {
         return $this->query(
             "SELECT * FROM {$this->table} WHERE id = ?",
@@ -80,8 +98,13 @@ class Table
         );
     }
 
-
-    public function create($fields)
+    /**
+     * Add an element to the Table
+     * @param array $fields
+     * @return mixed
+     * @throws PDOException
+     */
+    public function create(array $fields)
     {
         $sql_parts = [];
         $attributes = [];
@@ -100,7 +123,14 @@ class Table
         );
     }
 
-    public function update($id, $fields)
+    /**
+     * Edit an element to the Table
+     * @param int $id
+     * @param array $fields
+     * @return mixed
+     * @throws PDOException
+     */
+    public function update(int $id, array  $fields)
     {
         $sql_parts = [];
         $attributes = [];
@@ -120,7 +150,13 @@ class Table
         );
     }
 
-    public function delete($id)
+    /**
+     * Delet an element to the Table
+     * @param int $id
+     * @return mixed
+     * @throws PDOException
+     */
+    public function delete(int $id)
     {
         return $this->query(
             "DELETE FROM {$this->table} WHERE id = ?",
@@ -129,7 +165,14 @@ class Table
         );
     }
 
-    public function extract($key, $value)
+    /**
+     * Extracting properties from an Object
+     * @param string $key 
+     * @param string $value 
+     * @return array 
+     * @throws PDOException 
+     */
+    public function extract(string $key, string  $value)
     {
         $records = $this->all();
         $return = [];

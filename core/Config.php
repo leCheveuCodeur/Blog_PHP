@@ -7,7 +7,12 @@ class Config
     private $settings = [];
     private static $_instance;
 
-    static function getInstance($file)
+    /**
+     *Get the configuration variables
+     * @param string $file ex: __DIR__. '/config/config.php'
+     * @return mixed
+     */
+    static function getInstance(string $file)
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new Config($file);
@@ -20,7 +25,12 @@ class Config
         $this->settings = require($file);
     }
 
-    public function get($key)
+    /**
+     * Access to a configuration variable
+     * @param string $key
+     * @return mixed
+     */
+    public function get(string $key)
     {
         if (!isset($this->settings[$key])) {
             return \null;

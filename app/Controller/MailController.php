@@ -2,73 +2,28 @@
 
 namespace App\Controller;
 
-use Core\Config;
 use Core\HTML\BootstrapForm;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+use Core\Mail\Mail;
 
 class MailController extends AppController
 {
-    protected $mail;
+    private $mail;
 
     public function __construct()
     {
         parent::__construct();
-        $this->initMail();
+        $this->mail = new Mail;
     }
 
-    /**
-     * Initiate a Mail object
-     * @return void
-     * @throws Exception
-     */
-    private function initMail()
-    {
-        $config = Config::getInstance(ROOT . '/config/config.php');
-        $this->mail = new PHPMailer;
-        if (!empty($config->get('smtp_debug'))) {
-            $this->mail->isSMTP();
-            $this->mail->SMTPDebug = intval($config->get('smtp_debug'));
-            $this->mail->Host = $config->get('smtp_host');
-            $this->mail->Port = intval($config->get('smtp_port'));
-            if ($config->get('smtp_auth') == 1) {
-                $this->mail->SMTPAuth = !empty($config->get('smtp_auth'));
-                $this->mail->Username = $config->get('smtp_user');
-                $this->mail->Password = $config->get('smtp_pass');
-            }
-        } else {
-            $this->mail->isMail();
-        }
-        $this->mail->CharSet = 'UTF-8';
-        $this->mail->setLanguage('fr');
-        $this->mail->WordWrap = 78;
-        $this->mail->addAddress($config->get('mail_address'));
-    }
-
-/**
- * Displays the Contact view and generates the Mail sending
- * @return void 
- */
     public function contact()
     {
         $errors = '';
         $message = '';
 
         if (!empty($_POST)) {
-            $this->mail->setFrom($_POST['mail'], $_POST['name']);
-            $this->mail->Subject = $_POST['subject'];
-            $this->mail->Body = nl2br($_POST['content']);
-            $this->mail->AltBody = nl2br($_POST['content']);
-            $this->mail->IsHTML(false);
-
-            if (!$this->mail->send()) {
-                $errors = $this->mail->ErrorInfo;
-            } else {
-                $message = 'Message envoyé !';
-            }
+            \extract($this->mail->sendMail());
         }
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm();
         $this->render('mail.contact', \compact('form', 'errors', 'message'));
     }
 }

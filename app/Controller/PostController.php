@@ -22,14 +22,14 @@ class PostController extends AppController
     public function index(?int $page = \null)
     {
         // Set the number of posts per page
-        $limit = 4;
+        $limit = 6;
 
         \extract($this->Post->last());
         \extract($this->paging($page, $statement, $limit));
 
         $categories = $this->Category->onlyWithPosts();
         $comments = $this->Comment;
-        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories','comments'));
+        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'comments'));
     }
 
     /**
@@ -41,7 +41,7 @@ class PostController extends AppController
     public function category(int $category_id, ?int $page = \null)
     {
         // Set the number of posts per page
-        $limit = 2;
+        $limit = 6;
 
         $category =  $this->Category->find($category_id);
         if ($category === false) {
@@ -52,7 +52,8 @@ class PostController extends AppController
         \extract($this->paging($page, $statement, $limit, $attributes));
 
         $categories = $this->Category->onlyWithPosts();
-        $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category'));
+        $comments = $this->Comment;
+        $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category', 'comments'));
     }
 
     /**

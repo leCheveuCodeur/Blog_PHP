@@ -28,7 +28,8 @@ class PostController extends AppController
         \extract($this->paging($page, $statement, $limit));
 
         $categories = $this->Category->onlyWithPosts();
-        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories'));
+        $comments = $this->Comment;
+        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories','comments'));
     }
 
     /**
@@ -56,8 +57,8 @@ class PostController extends AppController
 
     /**
      * Display of a specific Post
-     * @param int $postId 
-     * @return void 
+     * @param int $postId
+     * @return void
      */
     public function show(int $postId)
     {

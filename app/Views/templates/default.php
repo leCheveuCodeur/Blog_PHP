@@ -1,40 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/src/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
     <title><?= App::getInstance()->title; ?></title>
-
-    <!-- Bootstrap core CSS -->
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
 </head>
 
-<body>
-    <?php include("header.php"); ?>
+<body class="bg-dark">
+    <header class="">
+        <?php include("nav.php"); ?>
+    </header>
 
-    <?php if (!empty($errors)) : ?>
-        <div class="alert alert-danger"><?= $errors; ?></div>
-    <?php endif; ?>
+    <main class="container-xxl text-light">
+        <?php if (!empty($errors)) : ?>
+            <div class="alert alert-danger"><?= $errors; ?></div>
+        <?php endif; ?>
 
-    <?php if (!empty($message)) : ?>
-        <div class="alert alert-success"><?= $message; ?></div>
-    <?php endif; ?>
+        <?php if (!empty($message)) : ?>
+            <div class="alert alert-success"><?= $message; ?></div>
+        <?php endif; ?>
 
-    <?= $content; ?>
+        <?= $content; ?>
+    </main>
 
-    <footer class="pt-5 my-5 text-muted border-top">
-        Created by the Bootstrap team &middot; &copy; 2021
+    <footer class="container-fluid pt-2 bg-dark">
+        <?php include("footer.php"); ?>
     </footer>
-    </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
 
 </body>
 

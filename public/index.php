@@ -8,7 +8,7 @@ App::load();
 if (isset($_GET['p'])) {
     $page = $_GET['p'];
 } else {
-    $page = 'post.index.1';
+    $page = 'home.index';
 }
 
 $page = explode('.', $page);

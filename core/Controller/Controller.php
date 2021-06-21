@@ -45,6 +45,21 @@ class Controller
     }
 
     /**
+     * Format a date at the Local stardard
+     * @param string $date
+     * @return string
+     */
+    protected function formatDate(string $date)
+    {
+        setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+
+        $date = \strtotime($date);
+        $day =  strftime("%d ", $date);
+        $day .=  ucfirst(strftime("%B ", $date));
+        return $day .=  strftime("%G", $date);
+    }
+
+    /**
      * Management in the event of an error HTTP 403
      * @return void
      */
@@ -66,8 +81,8 @@ class Controller
 
     /**
      * Add an XSS filter on the displayed datas
-     * @param string $input 
-     * @return string 
+     * @param string $input
+     * @return string
      */
     protected function antiXss(string $input)
     {

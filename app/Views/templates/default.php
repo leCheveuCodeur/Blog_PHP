@@ -28,7 +28,7 @@
         <?= $content; ?>
     </main>
 
-    <footer class="container-fluid pt-2 bg-dark">
+    <footer class="container-fluid pt-4 bg-dark">
         <?php include("footer.php"); ?>
     </footer>
 

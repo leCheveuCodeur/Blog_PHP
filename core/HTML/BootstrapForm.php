@@ -40,7 +40,7 @@ class BootstrapForm
      */
     protected function surround(string $html)
     {
-        return "<div class='mb-3'>{$html}</div>";
+        return "<div  class='form-floating'>{$html}</div>";
     }
 
     /**
@@ -53,20 +53,21 @@ class BootstrapForm
     {
         $type = !empty($option["type"]) ? $option["type"] : "text";
         $maxlength = !empty($option["maxlength"]) ? "maxlength='{$option['maxlength']}'" : \null;
-        $label = "<label for='{$name}' class='form-label'>{$label}</label>";
         if ($type === "textarea") {
-            $input = "<textarea name='{$name}' class='form-control' required>{$this->getValue($name)}</textarea>";
+            $input = "<textarea class='form-control' placeholder='{$this->getValue($name)}' id='{$name}' style='height: 200px' required></textarea>";
+            $label = "<label for='{$name}'>{$label}</label>";
         } else {
-            $input = "<input type='{$type}' name='{$name}' class='form-control' value='{$this->getValue($name)}' {$maxlength} required>";
+            $input = "<input type='{$type}' class='form-control' id='{$name}' placeholder='{$this->getValue($name)}' {$maxlength} required>";
+            $label = "<label for='{$name}' class='floatingInput'>{$label}</label>";
         }
 
-        return $this->surround($label . $input);
+        return $this->surround($input . $label);
     }
 
     public function select($name, $label, $options)
     {
-        $label = "<label>{$label}</label>";
-        $input = "<select class='form-control' name='{$name}'>";
+        $label = "<label for='floatingSelect'>{$label}</label>";
+        $input = "<select class='form-select' id='floatingSelect' name='{$name}'>";
         foreach ($options as $k => $v) {
             $attributes = "";
             if ($k == $this->getValue($name)) {
@@ -76,7 +77,7 @@ class BootstrapForm
         }
         $input .= "</select>";
 
-        return $this->surround($label . $input);
+        return $this->surround($input . $label);
     }
 
     /**

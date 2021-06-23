@@ -12,7 +12,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Accueil</a>
                         </li>
-                        <?php if (preg_match('/=post.show/', $_SERVER['QUERY_STRING'])) : ?>
+                        <?php if (preg_match('/=post.show|=mail.contact/', $_SERVER['QUERY_STRING'])) : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?p=post.index">Le Blog</a>
                             </li>
@@ -46,4 +46,3 @@
         </div>
     </div>
 </nav>
-

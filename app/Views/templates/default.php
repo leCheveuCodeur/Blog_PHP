@@ -18,11 +18,11 @@
 
     <main class="container-xxl text-light">
         <?php if (!empty($errors)) : ?>
-            <div class="alert alert-danger"><?= $errors; ?></div>
+            <div class="alert alert-danger w-50 ma-auto"><?= $errors; ?></div>
         <?php endif; ?>
 
         <?php if (!empty($message)) : ?>
-            <div class="alert alert-success"><?= $message; ?></div>
+            <div class="alert alert-success w-50 mx-auto"><?= $message; ?></div>
         <?php endif; ?>
 
         <?= $content; ?>

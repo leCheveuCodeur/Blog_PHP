@@ -1,23 +1,50 @@
-<h1><?= $this->antiXss($post->title); ?></h1>
-<p>Rédigé par <?= $this->antiXss($post->author); ?></p>
-<p><em><?= $post->category; ?></em></p>
-<h2><?= $this->antiXss($post->leadIn); ?></h2>
-<p><?= $this->antiXss($post->content); ?></p>
-<?php foreach ($comments as $comment) : ?>
-    <p><?= $this->antiXss($comment->content); ?>
-        par <?= $this->antiXss($comment->user); ?>
-        le <?= date("d/m/Y à H:i:s", strtotime($comment->lastDate)); ?>
-    </p>
-<?php endforeach; ?>
+<div class="blog container-xxl p-0">
 
-<?php if (empty($_SESSION['auth'])) : ?>
-    <a href="index.php?p=user.login&return=<?= \str_replace('index.php?p=', '', $post->url); ?>">Laisser un commentaire</a>
-<?php endif; ?>
+    <div class="hero_blog">
+        <h1 class="hero_blog-title text-center fw-bold"><?= $this->antiXss($post->title); ?></h1>
+    </div>
 
-<?php if (isset($_SESSION['auth'])) : ?>
-    <form action="index.php/?p=comment.add.<?= $post->id ?>" method="post">
-        <h3>Vous voulez réagir ? N'hésitez pas les bros !</h3>
-        <?= $form->input("content", "Commentaire", ["type" => "textarea"]); ?>
-        <button class="btn btn-primary">Commenter !</button>
-    </form>
-<?php endif; ?>
+    <div class="post-show">
+        <div class="post-show_infos d-flex flex-wrap justify-content-evenly d-lg-block text-center text-break text-lg-end me-lg-5 mt-lg-5">
+            <p class="text-secondary"><?= $this->formatDate($post->lastDate); ?></p>
+            <p class="text-light">par <?= $this->antiXss($post->author); ?></p>
+            <p><a class="nav-link p-0" href="?p=post.category.<?= $post->category_id; ?>">#<?= $post->category; ?></a></p>
+        </div>
+
+        <div class="post-show_post card p-4 p-md-5 text-dark shadow-sm">
+            <p class="fs-4 fw-bold"><?= $this->antiXss($post->leadIn); ?></p>
+            <p><?= $this->antiXss($post->content); ?></p>
+        </div>
+
+        <div class="post-show_comments">
+            <div class="d-flex flex-wrap justify-content-center justify-content-xl-between align-items-center mx-auto w-50">
+                <div class="comments_count text-secondary mx-auto"><?= count($comments); ?> Commentaire<?= count($comments) > 1 ? 's' : ''; ?></div>
+                <?php if (empty($_SESSION['auth'])) : ?>
+                    <a class="comments_post nav-link text-light p-0 mx-auto" href="index.php?p=user.login&return=<?= \str_replace('index.php?p=', '', $post->url); ?>">Poster un commentaire</a>
+                <?php endif; ?>
+            </div>
+
+            <div>
+                <?php foreach ($comments as $comment) : ?>
+                    <div class="comment_card text-dark mx-auto mt-4 p-2 p-md-3">
+                        <p class="m-0 text-secondary"><?= $this->antiXss($comment->user); ?>
+                            | <?= date("d/m/Y -- H:i", strtotime($comment->lastDate)); ?></p>
+                        <p class="m-0"><?= $this->antiXss($comment->content); ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div>
+                <?php if (isset($_SESSION['auth'])) : ?>
+                    <form class="post-show_addcomment mx-auto mt-5" action="index.php/?p=comment.add.<?= $post->id ?>" method="post">
+                        <p class="text-center">Laisser un commentaire</p>
+                        <?= $form->input("content", "Commentaire", ["type" => "textarea"]); ?>
+                        <button class="btn btn-primary d-block mx-auto">Commenter !</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+
+        </div>
+
+
+    </div>

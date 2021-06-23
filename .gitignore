@@ -1,4 +1,4 @@
 vendor/
 app/config/
-public/sass
-public/dist
+public/sass/
+public/dist/

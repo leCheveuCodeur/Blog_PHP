@@ -50,7 +50,7 @@ class PostTable extends Table
     public function findWithCategory(int $id)
     {
         return $this->query(
-            "SELECT p.id, p.title,p.leadIn, p.content, p.lastDate, c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.id = ?",
+            "SELECT p.id, p.title,p.leadIn, p.content, p.lastDate, p.category_id,c.title as category, u.username as author FROM post p LEFT JOIN category c ON p.category_id = c.id LEFT JOIN user u ON p.user_id = u.id WHERE p.id = ?",
             [$id],
             \true
         );

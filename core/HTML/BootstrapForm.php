@@ -40,7 +40,7 @@ class BootstrapForm
      */
     protected function surround(string $html)
     {
-        return "<div  class='form-floating'>{$html}</div>";
+        return "<div class='form-floating'>{$html}</div>";
     }
 
     /**
@@ -54,10 +54,10 @@ class BootstrapForm
         $type = !empty($option["type"]) ? $option["type"] : "text";
         $maxlength = !empty($option["maxlength"]) ? "maxlength='{$option['maxlength']}'" : \null;
         if ($type === "textarea") {
-            $input = "<textarea class='form-control' placeholder='{$this->getValue($name)}' id='{$name}' style='height: 200px' required></textarea>";
+            $input = "<textarea class='form-control' name='{$name}' placeholder='' style='height: 200px' required>{$this->getValue($name)}</textarea>";
             $label = "<label for='{$name}'>{$label}</label>";
         } else {
-            $input = "<input type='{$type}' class='form-control' id='{$name}' placeholder='{$this->getValue($name)}' {$maxlength} required>";
+            $input = "<input type='{$type}' class='form-control' name='{$name}' placeholder='' value='{$this->getValue($name)}' {$maxlength} required>";
             $label = "<label for='{$name}' class='floatingInput'>{$label}</label>";
         }
 

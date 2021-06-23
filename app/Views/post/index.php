@@ -12,7 +12,7 @@
 
     <div class="posts">
         <?php foreach ($posts as $post) : ?>
-            <div class="post bg-light text-dark rounded-2 px-3 py-2">
+            <div class="post bg-light text-dark rounded-2 px-3 py-2 shadow-sm">
                 <div class="post-infos text-primary fw-bold d-flex justify-content-between">
                     <div><?= $post->category; ?></div>
                     <div class="post-infos-comments"><?= count($comments->findWithPost($post->id));  ?></div>

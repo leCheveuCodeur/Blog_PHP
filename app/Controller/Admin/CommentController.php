@@ -24,7 +24,8 @@ class CommentController extends AppController
         \extract($this->Comment->pending());
         \extract($this->paging($page, $statement, $limit));
 
-        $this->render('admin.comment.index', compact('page', 'message', 'comments', 'nbPages', 'previous', 'next'));
+        $alert = $this->Comment->alert();
+        $this->render('admin.comment.index', compact('page', 'message', 'comments', 'nbPages', 'previous', 'next', 'alert'));
     }
 
     /**
@@ -43,8 +44,8 @@ class CommentController extends AppController
 
     /**
      * Delete a Comment
-     * @param int $id 
-     * @return void 
+     * @param int $id
+     * @return void
      */
     public function delete(int $id)
     {

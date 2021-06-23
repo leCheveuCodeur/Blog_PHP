@@ -7,6 +7,7 @@ class HomeController extends AppController
     public function __construct()
     {
         parent::__construct();
+        $this->loadModel('Comment');
     }
 
     /**
@@ -16,8 +17,7 @@ class HomeController extends AppController
      */
     public function index()
     {
-        $this->render('home.index');
+        $alert = $this->Comment->alert();
+        $this->render('home.index', \compact('alert'));
     }
-
-
 }

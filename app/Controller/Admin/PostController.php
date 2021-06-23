@@ -10,6 +10,8 @@ class PostController extends AppController
     {
         parent::__construct();
         $this->loadModel('Post');
+        $this->loadModel('Category');
+        $this->loadModel('Comment');
     }
 
     /**
@@ -25,7 +27,8 @@ class PostController extends AppController
         \extract($this->Post->lastByAuhtor($_SESSION['auth']));
         \extract($this->paging($page, $statement, $limit, $attributes));
 
-        $this->render('admin.post.index', \compact('page', 'posts', 'message', 'nbPages', 'previous', 'next'));
+        $alert=$this->Comment->alert();
+        $this->render('admin.post.index', \compact('page', 'posts', 'message', 'nbPages', 'previous', 'next','alert'));
     }
 
     /**
@@ -50,10 +53,11 @@ class PostController extends AppController
                 return $this->index(null, $message);
             }
         }
-        $this->loadModel('Category');
+
         $categories = $this->Category->extract('id', 'title');
         $form = new BootstrapForm($_POST);
-        $this->render('admin.post.edit', \compact('categories', 'form'));
+        $alert = $this->Comment->alert();
+        $this->render('admin.post.edit', \compact('alert', 'categories', 'form'));
     }
 
     /**
@@ -79,10 +83,10 @@ class PostController extends AppController
         }
 
         $post = $this->Post->find($id);
-        $this->loadModel('Category');
         $categories = $this->Category->extract('id', 'title');
+        $alert = $this->Comment->alert();
         $form = new BootstrapForm($post);
-        $this->render('admin.post.edit', \compact('categories', 'form'));
+        $this->render('admin.post.edit', \compact('categories', 'form', 'alert'));
     }
 
     /**

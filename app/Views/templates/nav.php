@@ -24,7 +24,10 @@
                     <?php }; ?>
                     <?php if (isset($_SESSION['admin'])) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php?p=admin.user.index">Dashboard</a>
+                            <a class="nav-link" href="index.php?p=admin.user.index">Dashboard<?php if (count($alert) > 0) : ?>
+                                <span class="badge bg-primary text-light"><?= count($alert); ?></span>
+                            <?php endif; ?>
+                            </a>
                         </li>
                     <?php endif; ?>
                 </div>

@@ -12,6 +12,7 @@ class MailController extends AppController
     public function __construct()
     {
         parent::__construct();
+        $this->loadModel('Comment');
         $this->mail = new Mail;
     }
 
@@ -24,6 +25,7 @@ class MailController extends AppController
             \extract($this->mail->sendMail());
         }
         $form = new BootstrapForm();
-        $this->render('mail.contact', \compact('form', 'errors', 'message'));
+        $alert = $this->Comment->alert();
+        $this->render('mail.contact', \compact('alert', 'form', 'errors', 'message'));
     }
 }

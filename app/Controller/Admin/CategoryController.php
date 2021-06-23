@@ -10,6 +10,7 @@ class CategoryController extends AppController
     {
         parent::__construct();
         $this->loadModel('Category');
+        $this->loadModel('Comment');
     }
 
     /**
@@ -26,7 +27,8 @@ class CategoryController extends AppController
         \extract($this->Category->list());
         \extract($this->paging($page, $statement, $limit));
 
-        $this->render('admin.category.index', \compact('page', 'categorys', 'message', 'nbPages', 'previous', 'next'));
+        $alert=$this->Comment->alert();
+        $this->render('admin.category.index', \compact('page', 'categorys', 'message', 'nbPages', 'previous', 'next','alert'));
     }
 
     /**
@@ -46,8 +48,9 @@ class CategoryController extends AppController
             }
         }
 
+        $alert=$this->Comment->alert();
         $form = new BootstrapForm($_POST);
-        $this->render('admin.category.edit', \compact('form'));
+        $this->render('admin.category.edit', \compact('form','alert'));
     }
 
     /**
@@ -69,8 +72,9 @@ class CategoryController extends AppController
         }
 
         $category = $this->Category->find($id);
+        $alert=$this->Comment->alert();
         $form = new BootstrapForm($category);
-        $this->render('admin.category.edit', \compact('form'));
+        $this->render('admin.category.edit', \compact('form','alert','category'));
     }
 
     /**

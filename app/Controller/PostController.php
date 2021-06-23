@@ -29,7 +29,8 @@ class PostController extends AppController
 
         $categories = $this->Category->onlyWithPosts();
         $comments = $this->Comment;
-        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'comments'));
+        $alert = $this->Comment->alert();
+        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'comments', 'alert'));
     }
 
     /**
@@ -53,7 +54,8 @@ class PostController extends AppController
 
         $categories = $this->Category->onlyWithPosts();
         $comments = $this->Comment;
-        $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category', 'comments'));
+        $alert = $this->Comment->alert();
+        $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category', 'comments', 'alert'));
     }
 
     /**
@@ -65,7 +67,8 @@ class PostController extends AppController
     {
         $post = $this->Post->findWithCategory($postId);
         $comments = $this->Comment->findWithPost($postId);
+        $alert = $this->Comment->alert();
         $form = new BootstrapForm($_POST);
-        $this->render('post.show', \compact('post', 'comments', 'form'));
+        $this->render('post.show', \compact('post', 'comments', 'alert', 'form'));
     }
 }

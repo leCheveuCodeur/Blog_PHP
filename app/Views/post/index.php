@@ -31,7 +31,7 @@
     <nav class="paging" aria-label="Page navigation">
         <ul class="pagination">
             <li class="page-item<?= $previous ?>">
-                <a class="page-link" href="?p=post.index.<?= $page - 1; ?>" aria-disabled="<?= !empty($previous) ? 'true' : '' ?>">&laquo;</a>
+                <a class="page-link" href="?p=post.index.<?= $page - 1; ?>" aria-disabled="<?= !empty($previous) ? 'true' : 'false' ?>">&laquo;</a>
             </li>
             <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
                 <li class="page-item <?= $i == $page ? ' active' : null; ?>" <?= $i == $page ? ' arria-current="page"' : null ?>>
@@ -39,7 +39,7 @@
                 </li>
             <?php endfor;  ?>
             <li class="page-item<?= $next ?>">
-                <a class="page-link" href="?p=post.index.<?= $page + 1; ?>" aria-disabled="<?= !empty($next) ? 'true' : '' ?>">&raquo;</a>
+                <a class="page-link" href="?p=post.index.<?= $page + 1; ?>" aria-disabled="<?= !empty($next) ? 'true' : 'false' ?>">&raquo;</a>
             </li>
         </ul>
     </nav>

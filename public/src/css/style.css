@@ -11824,4 +11824,19 @@ main {
   -ms-grid-column-span: 1;
   grid-column: 2/3;
 }
+
+.user-log {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto minmax(auto, 550px) auto;
+      grid-template-columns: auto minmax(auto, 550px) auto;
+  grid-row-gap: 15px;
+}
+
+.user-log div,
+.user-log button {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+}
 /*# sourceMappingURL=style.css.map */

@@ -1,7 +1,7 @@
 <?php
 
 use Core\Config;
-use Core\Database\MysqlDatabase;
+use Core\Services\Database\MysqlDatabase;
 
 
 class App

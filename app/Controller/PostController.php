@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Core\HTML\BootstrapForm;
+use Core\Services\HTML\BootstrapForm;
 
 class PostController extends AppController
 {

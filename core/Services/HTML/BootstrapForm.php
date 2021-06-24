@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\HTML;
+namespace Core\Services\HTML;
 
 
 /**

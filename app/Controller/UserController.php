@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App;
-use Core\Auth\DBAuth;
-use Core\HTML\BootstrapForm;
+use Core\Services\Auth\DBAuth;
+use Core\Services\HTML\BootstrapForm;
 use Exception;
 use PDOException;
 

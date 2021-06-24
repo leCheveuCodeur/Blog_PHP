@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use Core\HTML\BootstrapForm;
-use Core\Mail\Mail;
+use Core\Services\HTML\BootstrapForm;
+use Core\Services\Mail\Mail;
 
 class MailController extends AppController
 {

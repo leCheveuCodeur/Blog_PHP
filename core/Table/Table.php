@@ -2,7 +2,7 @@
 
 namespace Core\Table;
 
-use Core\Database\MysqlDatabase;
+use Core\Services\Database\MysqlDatabase;
 use PDOException;
 
 class Table
@@ -167,10 +167,10 @@ class Table
 
     /**
      * Extracting properties from an Object
-     * @param string $key 
-     * @param string $value 
-     * @return array 
-     * @throws PDOException 
+     * @param string $key
+     * @param string $value
+     * @return array
+     * @throws PDOException
      */
     public function extract(string $key, string  $value)
     {

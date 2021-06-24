@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Auth;
+namespace Core\Services\Auth;
 
-use Core\Database\MysqlDatabase;
+use Core\Services\Database\MysqlDatabase;
 use PDOException;
 
 class DBAuth
@@ -47,8 +47,8 @@ class DBAuth
     }
 
     /**
-     * Checks if the Visitor is logged 
-     * @return bool 
+     * Checks if the Visitor is logged
+     * @return bool
      */
     public function logged()
     {

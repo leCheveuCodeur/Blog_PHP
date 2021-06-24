@@ -65,10 +65,12 @@ class PostController extends AppController
      */
     public function show(int $postId)
     {
+        $POST = $this->globals->getPOST();
+
         $post = $this->Post->findWithCategory($postId);
         $comments = $this->Comment->findWithPost($postId);
         $alert = $this->Comment->alert();
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm($POST);
         $this->render('post.show', \compact('post', 'comments', 'alert', 'form'));
     }
 }

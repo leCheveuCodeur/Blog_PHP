@@ -37,15 +37,17 @@ class PostController extends AppController
      */
     public function add()
     {
-        if (!empty($_POST)) {
+        $POST = $this->globals->getPOST();
+
+        if (!empty($POST)) {
             $result = $this->Post->create([
                 'user_id' => $_SESSION['auth'],
-                'title' => $_POST['title'],
-                'leadIn' => $_POST['leadIn'],
-                'content' => $_POST['content'],
+                'title' => $POST['title'],
+                'leadIn' => $POST['leadIn'],
+                'content' => $POST['content'],
                 'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
-                'category_id' => $_POST['category_id']
+                'category_id' => $POST['category_id']
             ]);
 
             if ($result) {
@@ -55,7 +57,7 @@ class PostController extends AppController
         }
 
         $categories = $this->Category->extract('id', 'title');
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm($POST);
         $alert = $this->Comment->alert();
         $this->render('admin.post.edit', \compact('alert', 'categories', 'form'));
     }
@@ -67,13 +69,15 @@ class PostController extends AppController
      */
     public function edit(int $id)
     {
-        if (!empty($_POST)) {
+        $POST = $this->globals->getPOST();
+
+        if (!empty($POST)) {
             $result = $this->Post->update($id, [
-                'title' => $_POST['title'],
-                'leadIn' => $_POST['leadIn'],
-                'content' => $_POST['content'],
+                'title' => $POST['title'],
+                'leadIn' => $POST['leadIn'],
+                'content' => $POST['content'],
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
-                'category_id' => $_POST['category_id']
+                'category_id' => $POST['category_id']
             ]);
 
             if ($result) {

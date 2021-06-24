@@ -8,11 +8,11 @@
         <div class="collapse navbar-collapse row" id="navbarNav">
             <ul class="navbar-nav">
                 <div class="d-md-flex flex-grow-1">
-                    <?php if (!empty($_SERVER['QUERY_STRING'])) { ?>
+                    <?php if (!empty($this->globals->getSERVER('QUERY_STRING'))) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Accueil</a>
                         </li>
-                        <?php if (preg_match('/=post.show|=mail.contact/', $_SERVER['QUERY_STRING'])) : ?>
+                        <?php if (preg_match('/=post.show|=mail.contact/', $this->globals->getSERVER('QUERY_STRING'))) : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?p=post.index">Le Blog</a>
                             </li>
@@ -34,11 +34,11 @@
                 <div class="d-md-flex">
                     <?php if (isset($_SESSION['auth'])) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="?p=user.deconnect<?= \str_replace('p=', '&return=', $_SERVER['QUERY_STRING']); ?>">Déconnect'</a>
+                            <a class="nav-link" href="?p=user.deconnect<?= \str_replace('p=', '&return=', $this->globals->getSERVER('QUERY_STRING')); ?>">Déconnect'</a>
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="?p=user.login<?= \str_replace('p=', '&return=', $_SERVER['QUERY_STRING']); ?>">Se Connecter</a>
+                            <a class="nav-link" href="?p=user.login<?= \str_replace('p=', '&return=', $this->globals->getSERVER('QUERY_STRING')); ?>">Se Connecter</a>
                         </li>
                     <?php }; ?>
                     <li class="nav-item">

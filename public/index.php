@@ -1,12 +1,15 @@
 <?php
 
+use Core\Services\Globals\Globals;
+
 define('ROOT', dirname(__DIR__));
 
 require ROOT . '/app/App.php';
 App::load();
+$globals = new Globals;
 
-if (isset($_GET['p'])) {
-    $page = $_GET['p'];
+if (!empty($globals->getGET('p'))) {
+    $page = $globals->getGET('p');
 } else {
     $page = 'home.index';
 }

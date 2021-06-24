@@ -27,8 +27,8 @@ class CategoryController extends AppController
         \extract($this->Category->list());
         \extract($this->paging($page, $statement, $limit));
 
-        $alert=$this->Comment->alert();
-        $this->render('admin.category.index', \compact('page', 'categorys', 'message', 'nbPages', 'previous', 'next','alert'));
+        $alert = $this->Comment->alert();
+        $this->render('admin.category.index', \compact('page', 'categorys', 'message', 'nbPages', 'previous', 'next', 'alert'));
     }
 
     /**
@@ -37,9 +37,11 @@ class CategoryController extends AppController
      */
     public function add()
     {
-        if (!empty($_POST)) {
+        $POST = $this->globals->getPOST();
+
+        if (!empty($POST)) {
             $result = $this->Category->create([
-                "title" => $_POST["title"]
+                "title" => $POST["title"]
             ]);
 
             if ($result) {
@@ -48,9 +50,9 @@ class CategoryController extends AppController
             }
         }
 
-        $alert=$this->Comment->alert();
-        $form = new BootstrapForm($_POST);
-        $this->render('admin.category.edit', \compact('form','alert'));
+        $alert = $this->Comment->alert();
+        $form = new BootstrapForm($POST);
+        $this->render('admin.category.edit', \compact('form', 'alert'));
     }
 
     /**
@@ -60,9 +62,11 @@ class CategoryController extends AppController
      */
     public function edit(int $id)
     {
-        if (!empty($_POST)) {
+        $POST = $this->globals->getPOST();
+
+        if (!empty($POST)) {
             $result = $this->Category->update($id, [
-                "title" => $_POST["title"]
+                "title" => $POST["title"]
             ]);
 
             if ($result) {
@@ -72,9 +76,9 @@ class CategoryController extends AppController
         }
 
         $category = $this->Category->find($id);
-        $alert=$this->Comment->alert();
+        $alert = $this->Comment->alert();
         $form = new BootstrapForm($category);
-        $this->render('admin.category.edit', \compact('form','alert','category'));
+        $this->render('admin.category.edit', \compact('form', 'alert', 'category'));
     }
 
     /**

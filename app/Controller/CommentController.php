@@ -12,14 +12,16 @@ class CommentController extends AppController
 
     /**
      * Display the view to submit a comment
-     * @param int $id 
-     * @return void 
+     * @param int $id
+     * @return void
      */
     public function add(int $id)
     {
-        if (!empty($_POST) && !empty($_SESSION)) {
+        $POST = $this->globals->getPOST();
+
+        if (!empty($POST) && !empty($_SESSION)) {
             $comment = $this->Comment->create([
-                'content' => $_POST['content'],
+                'content' => $POST['content'],
                 'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'user_id' => $_SESSION['auth'],

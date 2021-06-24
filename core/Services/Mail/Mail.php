@@ -3,9 +3,10 @@
 namespace Core\Services\Mail;
 
 use Core\Config;
+use PHPMailer\PHPMailer\SMTP;
+use Core\Services\Gloabls\Globals;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 
 class Mail
 {
@@ -46,17 +47,18 @@ class Mail
 
     /**
      * Generate the Mail sending
+     * @param array $POST
      * @return array with the \compat function | !! use \extract to retrieve
      */
-    public function sendMail()
+    public function sendMail(array $POST)
     {
         $errors = '';
         $message = '';
 
-        $this->mail->setFrom($_POST['mail'], $_POST['name']);
-        $this->mail->Subject = $_POST['subject'];
-        $this->mail->Body = nl2br($_POST['content']);
-        $this->mail->AltBody = nl2br($_POST['content']);
+        $this->mail->setFrom($POST['mail'], $POST['name']);
+        $this->mail->Subject = $POST['subject'];
+        $this->mail->Body = nl2br($POST['content']);
+        $this->mail->AltBody = nl2br($POST['content']);
         $this->mail->IsHTML(false);
 
         if (!$this->mail->send()) {

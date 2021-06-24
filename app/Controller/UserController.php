@@ -24,16 +24,17 @@ class UserController extends AppController
     public function login()
     {
         $errors = \false;
-        if (!empty($_POST)) {
+        $POST = $this->globals->getPOST();
+        if (!empty($POST)) {
             $auth = new DBAuth(App::getInstance()->getDb());
-            if ($auth->login($_POST['usernameOrEmail'], $_POST['password'])) {
+            if ($auth->login($POST['usernameOrEmail'], $POST['password'])) {
                 $this->previousPage();
             } else {
                 $errors = 'Identifiants incorrect';
             }
         }
 
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm($POST);
         $this->render('user.login', \compact('form', 'errors'));
     }
 
@@ -44,16 +45,17 @@ class UserController extends AppController
     public function add()
     {
         $errors = \false;
-        if (!empty($_POST)) {
-            if ($_POST['password'] !== $_POST['password2']) {
+        $POST = $this->globals->getPOST();
+        if (!empty($POST)) {
+            if ($POST['password'] !== $POST['password2']) {
                 $errors = 'Mot de passe incorrect';
             } else {
-                $passwordHash = \password_hash($_POST['password'], \PASSWORD_DEFAULT);
+                $passwordHash = \password_hash($POST['password'], \PASSWORD_DEFAULT);
 
                 try {
                     $user = $this->User->create([
-                        'username' => $_POST['username'],
-                        'email' => $_POST['email'],
+                        'username' => $POST['username'],
+                        'email' => $POST['email'],
                         'password' => $passwordHash
                     ]);
                 } catch (Exception $errors) {
@@ -66,7 +68,7 @@ class UserController extends AppController
             }
         }
 
-        $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm($POST);
         $this->render('user.add', \compact('form', 'errors'));
     }
 

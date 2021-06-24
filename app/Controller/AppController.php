@@ -12,6 +12,7 @@ class AppController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         $this->viewPath = \ROOT . '/app/Views/';
         $this->table = $this->tableName();
     }

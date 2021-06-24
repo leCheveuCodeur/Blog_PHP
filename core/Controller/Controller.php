@@ -2,10 +2,18 @@
 
 namespace Core\Controller;
 
+use Core\Services\Globals\Globals;
+
 class Controller
 {
     protected $viewPath;
     protected $template;
+    protected $globals;
+
+    public function __construct()
+    {
+        $this->globals = new Globals;
+    }
 
     /**
      * Sends to the targeted View and sends the $variables
@@ -38,8 +46,10 @@ class Controller
      */
     protected function previousPage()
     {
-        if (isset($_GET['return'])) {
-            return \header('Location: index.php?p=' . $_GET['return']);
+        $GET = $this->globals->getGET();
+
+        if (isset($GET['return'])) {
+            return \header('Location: index.php?p=' . $GET['return']);
         }
         return \header('Location: index.php');
     }

@@ -21,8 +21,10 @@ class MailController extends AppController
         $errors = '';
         $message = '';
 
-        if (!empty($_POST)) {
-            \extract($this->mail->sendMail());
+        $POST = $this->globals->getPOST();
+
+        if (!empty($POST)) {
+            \extract($this->mail->sendMail($POST));
         }
         $form = new BootstrapForm();
         $alert = $this->Comment->alert();

@@ -32,9 +32,8 @@ class Table
     {
         if ($attributes) {
             return $this->db->prepare($statement, $attributes, \str_replace('Table', 'Entity', \get_called_class()), $one);
-        } else {
-            return $this->db->query($statement,  \str_replace('Table', 'Entity', \get_called_class()), $one);
         }
+        return $this->db->query($statement,  \str_replace('Table', 'Entity', \get_called_class()), $one);
     }
 
     /**
@@ -56,10 +55,7 @@ class Table
      */
     public function countRows(?string $statement = \null, ?array $attributes = \null): int
     {
-        if (!empty($statement)) {
-            $statement = \preg_replace('/SELECT.*FROM/im', "SELECT COUNT({$this->table[0]}.id) FROM", $statement);
-        }
-        $statement = empty($statement) ? "SELECT COUNT(id) FROM {$this->table}" : $statement;
+        $statement = empty($statement) ? "SELECT COUNT(id) FROM {$this->table}" : \preg_replace('/SELECT.*FROM/im', "SELECT COUNT({$this->table[0]}.id) FROM", $statement);
 
         return $this->query($statement, $attributes);
     }

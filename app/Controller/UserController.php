@@ -28,10 +28,9 @@ class UserController extends AppController
         if (!empty($POST)) {
             $auth = new DBAuth(App::getInstance()->getDb());
             if ($auth->login($POST['usernameOrEmail'], $POST['password'])) {
-                $this->previousPage();
-            } else {
-                $errors = 'Identifiants incorrect';
+                return $this->previousPage();
             }
+            $errors = 'Identifiants incorrect';
         }
 
         $form = new BootstrapForm($POST);

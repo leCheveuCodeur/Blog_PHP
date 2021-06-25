@@ -12,9 +12,15 @@ class Globals
     {
         $this->GET = \filter_input_array(\INPUT_GET) ?? \null;
         $this->POST = \filter_input_array(\INPUT_POST) ?? \null;
+        $this->SERVER = \filter_input_array(\INPUT_SERVER) ?? \null;
     }
 
-    public function getGET($key = \null)
+    /**
+     * Get $_GET
+     * @param string $key
+     * @return mixed
+     */
+    public function getGET(string $key = \null)
     {
 
         if (null !== $key) {
@@ -23,7 +29,12 @@ class Globals
         return $this->GET;
     }
 
-    public function getPOST($key = \null)
+    /**
+     * Get $_POST
+     * @param string $key
+     * @return mixed
+     */
+    public function getPOST(string $key = \null)
     {
 
         if (null !== $key) {
@@ -32,7 +43,12 @@ class Globals
         return $this->POST;
     }
 
-    public function getSERVER($key = \null)
+    /**
+     * Get $_SERVER
+     * @param string $key
+     * @return mixed
+     */
+    public function getSERVER(string $key = \null)
     {
 
         if (null !== $key) {

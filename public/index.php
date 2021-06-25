@@ -25,7 +25,13 @@ if ($page[0] === 'admin') {
     $id = isset($page[2]) ? $page[2] : null;
     $paging = isset($page[3]) ? $page[3] : null;
 }
+
+if (!class_exists($controller)) {
+    return \header('Location: index.php');
+}
+
 $controller = new $controller;
+
 if (isset($id) && isset($paging)) {
     return $controller->$action($id, $paging);
 }

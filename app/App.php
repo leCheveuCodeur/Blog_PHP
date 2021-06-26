@@ -10,7 +10,7 @@ class App
      * Title display in <title>
      * @var string
      */
-    public $title = "Mon super site";
+    public $title = "Julien JAMET";
 
     /**
      * Stock the DB instance

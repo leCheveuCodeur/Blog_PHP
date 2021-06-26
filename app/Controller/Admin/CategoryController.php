@@ -37,11 +37,11 @@ class CategoryController extends AppController
      */
     public function add()
     {
-        $POST = $this->globals->getPOST();
+        ;
 
-        if (!empty($POST)) {
+        if (!empty($this->POST)) {
             $result = $this->Category->create([
-                "title" => $POST["title"]
+                "title" => $this->POST["title"]
             ]);
 
             if ($result) {
@@ -51,7 +51,7 @@ class CategoryController extends AppController
         }
 
         $alert = $this->Comment->alert();
-        $form = new BootstrapForm($POST);
+        $form = new BootstrapForm($this->POST);
         $this->render('admin.category.edit', \compact('form', 'alert'));
     }
 
@@ -62,11 +62,11 @@ class CategoryController extends AppController
      */
     public function edit(int $id)
     {
-        $POST = $this->globals->getPOST();
+        ;
 
-        if (!empty($POST)) {
+        if (!empty($this->POST)) {
             $result = $this->Category->update($id, [
-                "title" => $POST["title"]
+                "title" => $this->POST["title"]
             ]);
 
             if ($result) {

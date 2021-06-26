@@ -24,16 +24,16 @@ class UserController extends AppController
     public function login()
     {
         $errors = \false;
-        $POST = $this->globals->getPOST();
-        if (!empty($POST)) {
+        ;
+        if (!empty($this->POST)) {
             $auth = new DBAuth(App::getInstance()->getDb());
-            if ($auth->login($POST['usernameOrEmail'], $POST['password'])) {
+            if ($auth->login($this->POST['usernameOrEmail'], $this->POST['password'])) {
                 return $this->previousPage();
             }
             $errors = 'Identifiants incorrect';
         }
 
-        $form = new BootstrapForm($POST);
+        $form = new BootstrapForm($this->POST);
         $this->render('user.login', \compact('form', 'errors'));
     }
 
@@ -44,17 +44,17 @@ class UserController extends AppController
     public function add()
     {
         $errors = \false;
-        $POST = $this->globals->getPOST();
-        if (!empty($POST)) {
-            if ($POST['password'] !== $POST['password2']) {
+        ;
+        if (!empty($this->POST)) {
+            if ($this->POST['password'] !== $this->POST['password2']) {
                 $errors = 'Mot de passe incorrect';
             } else {
-                $passwordHash = \password_hash($POST['password'], \PASSWORD_DEFAULT);
+                $passwordHash = \password_hash($this->POST['password'], \PASSWORD_DEFAULT);
 
                 try {
                     $user = $this->User->create([
-                        'username' => $POST['username'],
-                        'email' => $POST['email'],
+                        'username' => $this->POST['username'],
+                        'email' => $this->POST['email'],
                         'password' => $passwordHash
                     ]);
                 } catch (Exception $errors) {
@@ -67,7 +67,7 @@ class UserController extends AppController
             }
         }
 
-        $form = new BootstrapForm($POST);
+        $form = new BootstrapForm($this->POST);
         $this->render('user.add', \compact('form', 'errors'));
     }
 

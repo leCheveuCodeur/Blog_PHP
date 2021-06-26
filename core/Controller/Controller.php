@@ -8,11 +8,13 @@ class Controller
 {
     protected $viewPath;
     protected $template;
-    protected $globals;
 
     public function __construct()
     {
-        $this->globals = new Globals;
+        $this->GET= $this->accessGlobal('GET');
+        $this->POST= $this->accessGlobal('POST');
+        $this->SERVER= $this->accessGlobal('SERVER');
+        $this->SESSION= $this->accessGlobal('SESSION');
     }
 
     /**
@@ -46,10 +48,8 @@ class Controller
      */
     protected function previousPage()
     {
-        $GET = $this->globals->getGET();
-
-        if (isset($GET['return'])) {
-            return \header('Location: index.php?p=' . $GET['return']);
+        if (isset($this->GET['return'])) {
+            return \header('Location: index.php?p=' . $this->GET['return']);
         }
         return \header('Location: index.php');
     }
@@ -123,5 +123,17 @@ class Controller
         $next = $page >= $nbPages ? ' disabled' : \null;
 
         return \compact('nbPages', 'page', $rows, 'previous', 'next');
+    }
+
+/**
+ * Secure get access to superglobals
+ * @param string $global name of the superglobal targeted
+ * @return mixed
+ */
+    public function accessGlobal(string $global)
+    {
+        $globals=new Globals;
+        $global='get'.$global;
+        return $globals->$global();
     }
 }

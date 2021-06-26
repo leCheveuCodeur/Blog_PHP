@@ -17,14 +17,14 @@ class CommentController extends AppController
      */
     public function add(int $id)
     {
-        $POST = $this->globals->getPOST();
+        ;
 
-        if (!empty($POST) && !empty($_SESSION)) {
+        if (!empty($this->POST) && !empty($this->SESSION)) {
             $comment = $this->Comment->create([
-                'content' => $POST['content'],
+                'content' => $this->POST['content'],
                 'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
-                'user_id' => $_SESSION['auth'],
+                'user_id' => $this->SESSION['auth'],
                 'post_id' => $id
             ]);
 

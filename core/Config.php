@@ -32,9 +32,6 @@ class Config
      */
     public function get(string $key)
     {
-        if (!isset($this->settings[$key])) {
-            return \null;
-        }
-        return $this->settings[$key];
+        return $this->settings[$key] ?? \null;
     }
 }

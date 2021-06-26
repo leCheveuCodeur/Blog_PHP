@@ -24,7 +24,7 @@ class PostController extends AppController
         // Set the number of posts per page
         $limit = 2;
 
-        \extract($this->Post->lastByAuhtor($_SESSION['auth']));
+        \extract($this->Post->lastByAuhtor($this->SESSION['auth']));
         \extract($this->paging($page, $statement, $limit, $attributes));
 
         $alert=$this->Comment->alert();
@@ -37,17 +37,15 @@ class PostController extends AppController
      */
     public function add()
     {
-        $POST = $this->globals->getPOST();
-
-        if (!empty($POST)) {
+        if (!empty($this->POST)) {
             $result = $this->Post->create([
-                'user_id' => $_SESSION['auth'],
-                'title' => $POST['title'],
-                'leadIn' => $POST['leadIn'],
-                'content' => $POST['content'],
+                'user_id' => $this->SESSION['auth'],
+                'title' => $this->POST['title'],
+                'leadIn' => $this->POST['leadIn'],
+                'content' => $this->POST['content'],
                 'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
-                'category_id' => $POST['category_id']
+                'category_id' => $this->POST['category_id']
             ]);
 
             if ($result) {
@@ -57,7 +55,7 @@ class PostController extends AppController
         }
 
         $categories = $this->Category->extract('id', 'title');
-        $form = new BootstrapForm($POST);
+        $form = new BootstrapForm($this->POST);
         $alert = $this->Comment->alert();
         $this->render('admin.post.edit', \compact('alert', 'categories', 'form'));
     }
@@ -69,15 +67,13 @@ class PostController extends AppController
      */
     public function edit(int $id)
     {
-        $POST = $this->globals->getPOST();
-
-        if (!empty($POST)) {
+        if (!empty($this->POST)) {
             $result = $this->Post->update($id, [
-                'title' => $POST['title'],
-                'leadIn' => $POST['leadIn'],
-                'content' => $POST['content'],
+                'title' => $this->POST['title'],
+                'leadIn' => $this->POST['leadIn'],
+                'content' => $this->POST['content'],
                 'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
-                'category_id' => $POST['category_id']
+                'category_id' => $this->POST['category_id']
             ]);
 
             if ($result) {

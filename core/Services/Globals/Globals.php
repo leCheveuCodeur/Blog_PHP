@@ -7,12 +7,14 @@ class Globals
     private $GET;
     private $POST;
     private $SERVER;
+    private $SESSION;
 
     public function __construct()
     {
         $this->GET = \filter_input_array(\INPUT_GET) ?? \null;
         $this->POST = \filter_input_array(\INPUT_POST) ?? \null;
         $this->SERVER = \filter_input_array(\INPUT_SERVER) ?? \null;
+        $this->SESSION = \filter_var_array($_SESSION, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     }
 
     /**
@@ -56,4 +58,31 @@ class Globals
         }
         return $this->SERVER;
     }
+
+    /**
+     * Get $_SESSION
+     * @param string $key
+     * @return mixed
+     */
+    public function getSESSION(string $key = \null)
+    {
+
+        if (null !== $key) {
+            return $this->SESSION[$key] ?? \null;
+        }
+        return $this->SESSION;
+    }
+
+    // /**
+    //  * Set $_SESSION
+    //  * @param string $key
+    //  * @param string $value
+    //  * @return void
+    //  */
+    // public function setSESSION(string $key = \null, string $value)
+    // {
+    //     if (!empty($key)) {
+    //         $this->SESSION[$key] = $value;
+    //     }
+    // }
 }

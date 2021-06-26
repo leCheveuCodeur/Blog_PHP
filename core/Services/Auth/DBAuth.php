@@ -2,16 +2,19 @@
 
 namespace Core\Services\Auth;
 
-use Core\Services\Database\MysqlDatabase;
 use PDOException;
+use Core\Services\Globals\Globals;
+use Core\Services\Database\MysqlDatabase;
 
 class DBAuth
 {
     private $db;
+    protected $globals;
 
     public function __construct(MysqlDatabase $db)
     {
         $this->db = $db;
+        $this->globals = new Globals;
     }
 
     /**
@@ -21,7 +24,7 @@ class DBAuth
     public function getUserId()
     {
         if ($this->logged()) {
-            return $_SESSION["auth"];
+            return $this->SESSION["auth"];
         }
         return \false;
     }
@@ -52,6 +55,6 @@ class DBAuth
      */
     public function logged()
     {
-        return isset($_SESSION["auth"]);
+        return !empty($this->globals->getSESSION("auth"));
     }
 }

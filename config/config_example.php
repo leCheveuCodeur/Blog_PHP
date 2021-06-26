@@ -21,6 +21,6 @@ return array(
     // For GMAIL use an app password https://support.google.com/accounts/answer/185833?hl=fr
 
     // Receipt address
-    'mail_address'=>'julien.jamet37@gmail.com'
+    'mail_address' => 'your.email@mail.com'
 
 );

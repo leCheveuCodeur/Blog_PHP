@@ -2,3 +2,5 @@ vendor/
 app/config/
 public/sass/
 public/dist/
+public/src/css/style.css.map
+config/config.php

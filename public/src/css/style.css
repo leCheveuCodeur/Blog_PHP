@@ -11465,6 +11465,7 @@ fieldset:disabled .btn {
   }
 }
 
+/* BOOSTRAP */
 .btn-primary {
   color: white;
 }
@@ -11473,6 +11474,7 @@ fieldset:disabled .btn {
   border-radius: 20px;
 }
 
+/* PAGINATION */
 .paging {
   display: -ms-grid;
   display: grid;
@@ -11483,6 +11485,7 @@ fieldset:disabled .btn {
       justify-self: center;
 }
 
+/* BASE */
 body {
   display: -ms-grid;
   display: grid;
@@ -11499,6 +11502,7 @@ main {
           align-items: center;
 }
 
+/* NAVBAR */
 .navbar-brand:before {
   content: "";
   width: 29px;
@@ -11518,6 +11522,7 @@ main {
   z-index: 1 !important;
 }
 
+/* HERO */
 .hero {
   display: -ms-grid;
   display: grid;
@@ -11620,6 +11625,7 @@ main {
   }
 }
 
+/* FOOTER */
 .footer {
   display: -ms-grid;
   display: grid;
@@ -11649,6 +11655,7 @@ main {
   }
 }
 
+/* BLOG INDEX */
 .blog {
   display: -ms-grid;
   display: grid;
@@ -11673,6 +11680,7 @@ main {
   }
 }
 
+/* POSTS */
 .posts {
   display: -ms-grid;
   display: grid;
@@ -11723,6 +11731,7 @@ main {
   }
 }
 
+/* POST SHOW */
 .post-show {
   display: -ms-grid;
   display: grid;
@@ -11811,6 +11820,7 @@ main {
   }
 }
 
+/* CONTACT */
 .contact {
   display: -ms-grid;
   display: grid;
@@ -11826,6 +11836,7 @@ main {
   grid-column: 2/3;
 }
 
+/* USER */
 .user-log {
   display: -ms-grid;
   display: grid;
@@ -11841,6 +11852,7 @@ main {
   grid-column: 2/3;
 }
 
+/* ADMIN */
 .admin {
   display: -ms-grid;
   display: grid;

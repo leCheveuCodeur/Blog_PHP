@@ -17,8 +17,6 @@ class CommentController extends AppController
      */
     public function add(int $id)
     {
-        ;
-
         if (!empty($this->POST) && !empty($this->SESSION)) {
             $comment = $this->Comment->create([
                 'content' => $this->POST['content'],

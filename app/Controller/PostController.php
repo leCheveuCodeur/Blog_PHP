@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Core\Services\HTML\Paging;
 use Core\Services\HTML\BootstrapForm;
 
 class PostController extends AppController
@@ -19,43 +20,36 @@ class PostController extends AppController
      * @param null|int $page
      * @return void
      */
-    public function index(?int $page = \null)
+    public function index()
     {
-        // Set the number of posts per page
-        $limit = 6;
-
         \extract($this->Post->last());
-        \extract($this->paging($page, $statement, $limit));
+        \extract(Paging::generate(6, 'post.index', $this->Post, $statement));
 
         $categories = $this->Category->onlyWithPosts();
         $comments = $this->Comment;
         $alert = $this->Comment->alert();
-        $this->render('post.index', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'comments', 'alert'));
+        $this->render('post.index', \compact('paging', 'posts', 'categories', 'comments', 'alert'));
     }
 
     /**
      * Displaying the Posts of a Category
      * @param int $category_id
-     * @param null|int $page
      * @return void
      */
-    public function category(int $category_id, ?int $page = \null)
+    public function category(int $category_id)
     {
-        // Set the number of posts per page
-        $limit = 6;
-
         $category =  $this->Category->find($category_id);
         if ($category === false) {
             $this->notFound();
         }
 
         \extract($this->Post->lastByCategory($category_id));
-        \extract($this->paging($page, $statement, $limit, $attributes));
+        \extract(Paging::generate(6, 'post.category.' . $category_id, $this->Post, $statement, $attributes));
 
         $categories = $this->Category->onlyWithPosts();
         $comments = $this->Comment;
         $alert = $this->Comment->alert();
-        $this->render('post.category', \compact('page', 'posts', 'nbPages', 'previous', 'next', 'categories', 'category', 'comments', 'alert'));
+        $this->render('post.category', \compact('category_id', 'posts', 'paging', 'categories', 'category', 'comments', 'alert'));
     }
 
     /**

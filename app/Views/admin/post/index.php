@@ -7,19 +7,19 @@
         <table class="table table-dark table-hover">
             <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>Dernière édition</td>
-                    <td>Titre</td>
-                    <td>Actions</td>
+                    <th>ID</th>
+                    <th>Dernière édition</th>
+                    <th>Titre</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($posts as $post) : ?>
                     <tr>
-                        <td><?= $post->id; ?></td>
-                        <td><?= 'le ' . date("d/m/Y", strtotime($post->lastDate)) . '<br> à ' . date("H:i:s", strtotime($post->lastDate)); ?></td>
-                        <td><?= $this->antiXss($post->title); ?></td>
-                        <td>
+                        <td data-label="ID"><?= $post->id; ?></td>
+                        <td data-label="Dernière édition"><?= 'le ' . date("d/m/Y", strtotime($post->lastDate)) . '<br> à ' . date("H:i:s", strtotime($post->lastDate)); ?></td>
+                        <td data-label="Titre"><?= $this->antiXss(\substr($post->title, 0, 100)); ?>.<?= strlen($post->title) > 99 ? '...' : '' ?></td>
+                        <td class="table-action">
                             <a class="btn btn-primary" href="?p=admin.post.edit.<?= $post->id ?>">Editer</a>
                             <a class="btn btn-danger" href="?p=admin.post.delete.<?= $post->id ?>">Supprimer</a>
                         </td>
@@ -28,21 +28,8 @@
             </tbody>
         </table>
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item<?= $previous ?>">
-                    <a class="page-link" href="?p=admin.post.index.<?= $page - 1; ?>" aria-disabled="<?= !empty($previous) ? 'true' : '' ?>">&laquo;</a>
-                </li>
-                <?php for ($i = 1; $i <= $nbPages; $i++) : ?>
-                    <li class="page-item <?= $i == $page ? ' active' : null; ?>" <?= $i == $page ? ' arria-current="page"' : null ?>>
-                        <a class="page-link" href="?p=admin.post.index.<?= $i; ?>"><?= $i; ?></a>
-                    </li>
-                <?php endfor;  ?>
-                <li class="page-item<?= $next ?>">
-                    <a class="page-link" href="?p=admin.post.index.<?= $page + 1; ?>" aria-disabled="<?= !empty($next) ? 'true' : '' ?>">&raquo;</a>
-                </li>
-            </ul>
-        </nav>
+        <?= $paging; ?>
+
     </div>
 
 </div>

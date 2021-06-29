@@ -4,7 +4,7 @@
     </div>
     <div>
         <form class="admin-edit" method="post">
-            <?= $form->input("title", "Titre de l'article"); ?>
+            <?= $form->input("title", "Titre de l'article", ["maxlength" => 255]); ?>
             <?= $form->input("leadIn", "Châpo", ["type" => "textarea", "maxlength" => 355]); ?>
             <?= $form->input("content", "Contenu", ["type" => "textarea"]); ?>
             <?= $form->select("category_id", "Catégorie", $categories); ?>

@@ -14,7 +14,7 @@ $page = explode('.', $page);
 if ($page[0] === 'admin') {
     $controller = '\App\Controller\Admin\\' . ucfirst($page[1]) . 'Controller';
     $action = $page[2];
-    $id = $page[3] ?? null;
+    $id = (!empty($page[3]) && ($page[2] !== 'index' && $page[2] !== 'add')) ? $page[3] : null;
 } else {
     $controller = '\App\Controller\\' . ucfirst($page[0]) . 'Controller';
     $action = $page[1];
@@ -28,7 +28,11 @@ if (!class_exists($controller)) {
 
 $controller = new $controller;
 
-if (isset($id) && isset($paging)) {
-    return $controller->$action($id, $paging);
+try {
+    if (!empty($id) && !empty($paging)) {
+        return $controller->$action($id, $paging);
+    }
+    return !empty($id) ? $controller->$action($id) : $controller->$action();
+} catch (ArgumentCountError  $e) {
+    return \header('Location: index.php');
 }
-return isset($id) ? $controller->$action($id) : $controller->$action();

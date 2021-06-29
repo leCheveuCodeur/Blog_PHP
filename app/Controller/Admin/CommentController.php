@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use Core\Services\HTML\Paging;
+
 class CommentController extends AppController
 {
     public function __construct()
@@ -12,20 +14,16 @@ class CommentController extends AppController
 
     /**
      * Display of Comments pending validation
-     * @param null|int $page
      * @param null|string $message
      * @return void
      */
-    public function index(?int $page = \null, ?string $message = \null)
+    public function index(?string $message = \null)
     {
-        // Set the number of comments per page
-        $limit = 10;
-
         \extract($this->Comment->pending());
-        \extract($this->paging($page, $statement, $limit));
+        \extract(Paging::generate(6, 'admin.comment.index', $this->Comment, $statement));
 
         $alert = $this->Comment->alert();
-        $this->render('admin.comment.index', compact('page', 'message', 'comments', 'nbPages', 'previous', 'next', 'alert'));
+        $this->render('admin.comment.index', compact('paging', 'message', 'comments', 'alert'));
     }
 
     /**
@@ -38,8 +36,7 @@ class CommentController extends AppController
         $this->Comment->update($id, [
             'approved' => 1
         ]);
-        $message = "Commentaire validé";
-        return $this->index(null, $message);
+        return $this->index('Commentaire validé');
     }
 
     /**
@@ -50,7 +47,6 @@ class CommentController extends AppController
     public function delete(int $id)
     {
         $this->Comment->delete($id);
-        $message = "Commentaire supprimé";
-        return $this->index(null, $message);
+        return $this->index('Commentaire supprimé');
     }
 }

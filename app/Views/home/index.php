@@ -1,4 +1,4 @@
-<div class="hero p-5 text-center text-lg-start">
+<div class="hero p-5 text-center text-lg-start mx-auto">
     <div class="hero-title">
         <h1 class="fw-bold">Developpeur PHP / Symfony</h1>
         <p class="fw-light fs-2">Efficace & Minimaliste</p>

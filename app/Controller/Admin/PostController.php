@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use Core\Services\HTML\Paging;
 use Core\Services\HTML\BootstrapForm;
 
 class PostController extends AppController
@@ -19,16 +20,13 @@ class PostController extends AppController
      * @param null|string $message for validation
      * @return void
      */
-    public function index(?int $page = \null, ?string $message = \null)
+    public function index(?string $message = \null)
     {
-        // Set the number of posts per page
-        $limit = 2;
-
         \extract($this->Post->lastByAuhtor($this->SESSION['auth']));
-        \extract($this->paging($page, $statement, $limit, $attributes));
+        \extract(Paging::generate(6, 'admin.post.index', $this->Post, $statement, $attributes));
 
-        $alert=$this->Comment->alert();
-        $this->render('admin.post.index', \compact('page', 'posts', 'message', 'nbPages', 'previous', 'next','alert'));
+        $alert = $this->Comment->alert();
+        $this->render('admin.post.index', \compact('posts', 'paging', 'message', 'alert'));
     }
 
     /**
@@ -48,10 +46,7 @@ class PostController extends AppController
                 'category_id' => $this->POST['category_id']
             ]);
 
-            if ($result) {
-                $message = "Article publié";
-                return $this->index(null, $message);
-            }
+            return $this->index('Article publié');
         }
 
         $categories = $this->Category->extract('id', 'title');
@@ -76,17 +71,14 @@ class PostController extends AppController
                 'category_id' => $this->POST['category_id']
             ]);
 
-            if ($result) {
-                $message = "Article modifié";
-                return $this->index(null, $message);
-            }
+            return $this->index('Article modifié');
         }
 
         $post = $this->Post->find($id);
         $categories = $this->Category->extract('id', 'title');
         $alert = $this->Comment->alert();
         $form = new BootstrapForm($post);
-        $this->render('admin.post.edit', \compact('categories', 'form', 'alert'));
+        $this->render('admin.post.edit', \compact('post', 'categories', 'form', 'alert'));
     }
 
     /**
@@ -97,7 +89,6 @@ class PostController extends AppController
     public function delete(int $id)
     {
         $this->Post->delete($id);
-        $message = "Article supprimé";
-        return $this->index(null, $message);
+        return $this->index('Article supprimé');
     }
 }

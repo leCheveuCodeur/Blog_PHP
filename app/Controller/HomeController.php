@@ -12,7 +12,6 @@ class HomeController extends AppController
 
     /**
      * Display home page
-     * @param null|string $message for validation
      * @return void
      */
     public function index()

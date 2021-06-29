@@ -21,8 +21,6 @@ class MailController extends AppController
         $errors = '';
         $message = '';
 
-        ;
-
         if (!empty($this->POST)) {
             \extract($this->mail->sendMail($this->POST));
         }

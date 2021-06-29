@@ -5,14 +5,14 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse row" id="navbarNav">
+        <div class="collapse navbar-collapse row text-center py-3" id="navbarNav">
             <ul class="navbar-nav">
                 <div class="d-md-flex flex-grow-1">
                     <?php if (!empty($this->SERVER['QUERY_STRING'])) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Accueil</a>
                         </li>
-                        <?php if (preg_match('/=post.show|=mail.contact/', $this->SERVER['QUERY_STRING'])) : ?>
+                        <?php if (preg_match('/=post.show|=mail.contact|=admin/', $this->SERVER['QUERY_STRING'])) : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?p=post.index">Le Blog</a>
                             </li>

@@ -20,7 +20,7 @@
             <div class="d-flex flex-wrap justify-content-center justify-content-xl-between align-items-center mx-auto w-50">
                 <div class="comments_count text-secondary mx-auto"><?= count($comments); ?> Commentaire<?= count($comments) > 1 ? 's' : ''; ?></div>
                 <?php if (empty($this->SESSION['auth'])) : ?>
-                    <a class="comments_post nav-link text-light p-0 mx-auto" href="index.php?p=user.login&return=<?= \str_replace('index.php?p=', '', $post->url); ?>">Poster un commentaire</a>
+                    <a class="comments_post nav-link text-light p-0 mx-auto text-center" href="index.php?p=user.login&return=<?= \str_replace('index.php?p=', '', $post->url); ?>">Poster un commentaire</a>
                 <?php endif; ?>
             </div>
 
@@ -39,7 +39,7 @@
                     <form class="post-show_addcomment mx-auto mt-5" action="index.php/?p=comment.add.<?= $post->id ?>" method="post">
                         <p class="text-center">Laisser un commentaire</p>
                         <?= $form->input("content", "Commentaire", ["type" => "textarea"]); ?>
-                        <button class="btn btn-primary d-block mx-auto">Commenter !</button>
+                        <button class="btn btn-primary d-block mx-auto ">Commenter !</button>
                     </form>
                 <?php endif; ?>
             </div>

@@ -30,7 +30,7 @@ The goal of this project is to create a professional blog with the [PHP](https:/
   composer.phar install
   ```
 * Import database with datas : file 'database.sql',
-* Rename 'config_example.php' in folder /config on 'config/php' and edit this,
+* Rename 'config_example.php' in folder /config on 'config.php' and edit this,
 * And connect you !
 
   ```

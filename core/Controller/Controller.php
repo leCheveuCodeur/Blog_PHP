@@ -11,10 +11,10 @@ class Controller
 
     public function __construct()
     {
-        $this->GET= $this->accessGlobal('GET');
-        $this->POST= $this->accessGlobal('POST');
-        $this->SERVER= $this->accessGlobal('SERVER');
-        $this->SESSION= $this->accessGlobal('SESSION');
+        $this->GET = $this->accessGlobal('GET');
+        $this->POST = $this->accessGlobal('POST');
+        $this->SERVER = $this->accessGlobal('SERVER');
+        $this->SESSION = $this->accessGlobal('SESSION');
     }
 
     /**
@@ -100,40 +100,14 @@ class Controller
     }
 
     /**
-     * Paging of the past SQL statement
-     * @param null|int $page of the paging system
-     * @param string $statement
-     * @param int $limit number of elements returned per page
-     * @param null|array $attributes
-     * @return array with the \compat function | !! use \extract to retrieve variables
+     * Secure get access to superglobals
+     * @param string $global name of the superglobal targeted
+     * @return mixed
      */
-    public function paging(?int $page = \null, string $statement, int $limit, ?array $attributes = \null): array
-    {
-        $rows = \lcfirst($this->table . 's');
-        $table = $this->table;
-
-        $nbRows = $this->$table->countRows($statement, $attributes);
-        $nbPages = \ceil($nbRows / $limit);
-        $page = !empty($page) && $page <= $nbPages ? $page : 1;
-        // add the offest to the base SQL statement
-        $$rows = $this->$table->offset($statement, $attributes, $limit, $page);
-
-        // manages the disabling of the previous and following btn
-        $previous = $page === 1 ? ' disabled' : \null;
-        $next = $page >= $nbPages ? ' disabled' : \null;
-
-        return \compact('nbPages', 'page', $rows, 'previous', 'next');
-    }
-
-/**
- * Secure get access to superglobals
- * @param string $global name of the superglobal targeted
- * @return mixed
- */
     public function accessGlobal(string $global)
     {
-        $globals=new Globals;
-        $global='get'.$global;
+        $globals = new Globals;
+        $global = 'get' . $global;
         return $globals->$global();
     }
 }

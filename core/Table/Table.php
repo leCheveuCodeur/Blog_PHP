@@ -7,7 +7,7 @@ use PDOException;
 
 class Table
 {
-    protected $table;
+    public $table;
     protected $db;
 
     public function __construct(MysqlDatabase $db)

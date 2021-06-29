@@ -4,17 +4,17 @@ namespace Core\Services\HTML;
 
 
 /**
- * Permet de générer un formulaire Bootstap rapidement et simplement
+ * Generate a Bootstap form quickly and easily
  */
 class BootstrapForm
 {
     /**
-     * @var array Données utilisées par le formulaire
+     * @var array Data used by the form
      */
     protected $data;
 
     /**
-     * @param array $data Données utilisées par le formulaire
+     * @param array $data Data used by the form
      * @return void
      */
     public function __construct($data = [])
@@ -23,7 +23,7 @@ class BootstrapForm
     }
 
     /**
-     * @param string $index Index de la valeur à récuperer
+     * @param string $index Index of the value to be recovered
      * @return string
      */
     protected function getValue(string $index)
@@ -35,7 +35,7 @@ class BootstrapForm
     }
 
     /**
-     * @param string $html Code HTML à entourer
+     * @param string $html Code HTML to surround it
      * @return string
      */
     protected function surround(string $html)
@@ -54,10 +54,10 @@ class BootstrapForm
         $type = !empty($option["type"]) ? $option["type"] : "text";
         $maxlength = !empty($option["maxlength"]) ? "maxlength='{$option['maxlength']}'" : \null;
         if ($type === "textarea") {
-            $input = "<textarea class='form-control' name='{$name}' placeholder='' style='height: 200px' required>{$this->getValue($name)}</textarea>";
+            $input = "<textarea class='form-control' name='{$name}' {$maxlength} style='height: 200px' placeholder='' required>{$this->getValue($name)}</textarea>";
             $label = "<label for='{$name}'>{$label}</label>";
         } else {
-            $input = "<input type='{$type}' class='form-control' name='{$name}' placeholder='' value='{$this->getValue($name)}' {$maxlength} required>";
+            $input = "<input type='{$type}' class='form-control' name='{$name}' value='{$this->getValue($name)}' {$maxlength} placeholder='' required>";
             $label = "<label for='{$name}' class='floatingInput'>{$label}</label>";
         }
 

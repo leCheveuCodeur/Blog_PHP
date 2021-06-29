@@ -17,11 +17,11 @@ class PostEntity extends Entity
 
     /**
      * Return an extrait of 100 characters
-     * @return string 
+     * @return string
      */
     public function getExtrait()
     {
-        $html = "<p>" . \substr(\nl2br(\htmlspecialchars($this->leadIn)), 0, 100) . "...</p>";
+        $html = \substr(\nl2br(\htmlspecialchars($this->leadIn)), 0, 100) . "...";
         $html .= "<p><a href= " . $this->getUrl() . ">Voir la suite</a></p>";
         return $html;
     }

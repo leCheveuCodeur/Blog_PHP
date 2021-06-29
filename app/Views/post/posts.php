@@ -6,7 +6,7 @@
                 <div class="post-infos-comments"><?= count($comments->findWithPost($post->id));  ?></div>
             </div>
 
-            <h2 class="post-h2"><a class="text-dark" href="<?= $post->url; ?>"><?= $this->antiXss(\substr($post->title, 0, 80)); ?>.<?= strlen($post->title) > 80 ? '...' : '' ?></a></h2>
+            <h2 class="post-h2 fs-3"><a class="text-dark" href="<?= $post->url; ?>"><?= $this->antiXss(\substr($post->title, 0, 85)); ?>.<?= strlen($post->title) > 85 ? '...' : '' ?></a></h2>
 
             <p class="text-secondary fw-bold"><?= $post->author; ?> / <?= $this->formatDate($post->lastDate); ?></p>
 

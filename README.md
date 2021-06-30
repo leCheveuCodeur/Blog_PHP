@@ -1,10 +1,15 @@
-# Blog_PHP  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522fec0f67e64c7197e4c2cb6709d631)](https://www.codacy.com/gh/leCheveuCodeur/Blog_PHP/dashboard?utm_source=github.com&utm_medium=referral&utm_content=leCheveuCodeur/Blog_PHP&utm_campaign=Badge_Grade)
+# Blog_PHP  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522fec0f67e64c7197e4c2cb6709d631)](https://www.codacy.com/gh/leCheveuCodeur/Blog_PHP/dashboard?utm_source=github.com&utm_medium=referral&utm_content=leCheveuCodeur/Blog_PHP&utm_campaign=Badge_Grade) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leCheveuCodeur/Blog_PHP/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/leCheveuCodeur/Blog_PHP/?branch=main)
 
 ## Description
 
 This project is the 5th project of the [Developer PHP / Symfony](https://openclassrooms.com/fr/paths/59-developpeur-dapplication-php-symfony) formation of [Openclassrooms](https://openclassrooms.com/).
 
 The goal of this project is to create a professional blog with the [PHP](https://www.php.net/manual/en/intro-whatis.php) language without any frameworks.
+
+## How it work
+
+![Blog_PHP](Blog_PHP.gif)
+
 
 ## Build with
 

@@ -47,7 +47,7 @@ class Paging
                     <li class="page-item <?= $i == $page ? ' active' : null; ?>" <?= $i == $page ? ' arria-current="page"' : null ?>>
                         <a class="page-link" href="?p=<?= $queryString; ?><?= '.' . $i; ?>"><?= $i; ?></a>
                     </li>
-                <?php endfor;  ?>
+                <?php endfor; ?>
                 <?php if (empty($next)) : ?>
                     <li class="page-item<?= $next ?>">
                         <a class="page-link" href="?p=<?= $queryString; ?><?= '.' . ($page + 1); ?>">&raquo;</a>

@@ -33,7 +33,7 @@ class Table
         if ($attributes) {
             return $this->db->prepare($statement, $attributes, \str_replace('Table', 'Entity', \get_called_class()), $one);
         }
-        return $this->db->query($statement,  \str_replace('Table', 'Entity', \get_called_class()), $one);
+        return $this->db->query($statement, \str_replace('Table', 'Entity', \get_called_class()), $one);
     }
 
     /**

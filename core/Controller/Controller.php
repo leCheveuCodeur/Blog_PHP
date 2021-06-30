@@ -64,9 +64,9 @@ class Controller
         setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
         $date = \strtotime($date);
-        $day =  strftime("%d ", $date);
-        $day .=  ucfirst(strftime("%B ", $date));
-        return $day .=  strftime("%G", $date);
+        $day = strftime("%d ", $date);
+        $day .= ucfirst(strftime("%B ", $date));
+        return $day .= strftime("%G", $date);
     }
 
     /**

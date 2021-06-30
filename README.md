@@ -1,4 +1,4 @@
-# Blog_PHP  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522fec0f67e64c7197e4c2cb6709d631)](https://www.codacy.com/gh/leCheveuCodeur/Blog_PHP/dashboard?utm_source=github.com&utm_medium=referral&utm_content=leCheveuCodeur/Blog_PHP&utm_campaign=Badge_Grade) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leCheveuCodeur/Blog_PHP/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/leCheveuCodeur/Blog_PHP/?branch=main)
+# Blog_PHP  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/522fec0f67e64c7197e4c2cb6709d631)](https://www.codacy.com/gh/leCheveuCodeur/Blog_PHP/dashboard?utm_source=github.com&utm_medium=referral&utm_content=leCheveuCodeur/Blog_PHP&utm_campaign=Badge_Grade) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leCheveuCodeur/Blog_PHP/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/leCheveuCodeur/Blog_PHP/?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/79c794bfacdb05123fbe/maintainability)](https://codeclimate.com/github/leCheveuCodeur/Blog_PHP/maintainability)
 
 ## Description
 
@@ -9,7 +9,6 @@ The goal of this project is to create a professional blog with the [PHP](https:/
 ## How it work
 
 ![Blog_PHP](Blog_PHP.gif)
-
 
 ## Build with
 
@@ -24,18 +23,18 @@ The goal of this project is to create a professional blog with the [PHP](https:/
 
 ## Installation
 
-* Clone or download the repository, and put files into your environment,
+* **Clone or download the repository**, and put files into your environment,
 
   ```
   git clone https://github.com/leCheveuCodeur/Blog_PHP.git
   ```
-* Install libraries with composer,
+* Install libraries with **composer**,
 
   ```
   composer.phar install
   ```
-* Import database with datas : file 'database.sql',
-* Rename 'config_example.php' in folder /config on 'config.php' and edit this,
+* Import database with datas : file '***database.sql***',
+* Rename '***config_example.php***' in folder **/config** on '***config.php***' and edit this,
 * And connect you !
 
   ```

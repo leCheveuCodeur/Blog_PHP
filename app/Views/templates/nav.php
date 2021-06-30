@@ -22,7 +22,7 @@
                             <a class="nav-link" href="index.php?p=post.index">Le Blog</a>
                         </li>
                     <?php }; ?>
-                    <?php if (isset($this->SESSION['admin'])) : ?>
+                    <?php if (isset($this->SESSION['admin']) && !preg_match('/=user/', $this->SERVER['QUERY_STRING'])) : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?p=admin.user.index">Dashboard<?php if (count($alert) > 0 && isset($alert)) : ?>
                                 <span class="badge bg-primary text-light"><?= count($alert); ?></span>

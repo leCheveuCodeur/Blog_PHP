@@ -24,13 +24,15 @@ class UserController extends AppController
     public function login()
     {
         $errors = \false;
-        ;
         if (!empty($this->POST)) {
-            $auth = new DBAuth(App::getInstance()->getDb());
-            if ($auth->login($this->POST['usernameOrEmail'], $this->POST['password'])) {
-                return $this->previousPage();
+            // detect spam bot
+            if (empty($this->POST['pseudo']) && $this->POST['pseudo'] === '') {
+                $auth = new DBAuth(App::getInstance()->getDb());
+                if ($auth->login($this->POST['usernameOrEmail'], $this->POST['password'])) {
+                    return $this->previousPage();
+                }
+                $errors = 'Identifiants incorrect';
             }
-            $errors = 'Identifiants incorrect';
         }
 
         $form = new BootstrapForm($this->POST);
@@ -43,26 +45,28 @@ class UserController extends AppController
      */
     public function add()
     {
-        $errors = \false;
-        ;
+        $errors = \false;;
         if (!empty($this->POST)) {
-            if ($this->POST['password'] !== $this->POST['password2']) {
-                $errors = 'Mot de passe incorrect';
-            } else {
-                $passwordHash = \password_hash($this->POST['password'], \PASSWORD_DEFAULT);
+            // detect spam bot
+            if (empty($this->POST['nom']) && $this->POST['nom'] === '') {
+                if ($this->POST['password'] !== $this->POST['password2']) {
+                    $errors = 'Mot de passe incorrect';
+                } else {
+                    $passwordHash = \password_hash($this->POST['password'], \PASSWORD_DEFAULT);
 
-                try {
-                    $user = $this->User->create([
-                        'username' => $this->POST['username'],
-                        'email' => $this->POST['email'],
-                        'password' => $passwordHash
-                    ]);
-                } catch (Exception $errors) {
-                    $errors = 'Pseudo ou Email deja utilisé, veuillez changer';
-                }
+                    try {
+                        $user = $this->User->create([
+                            'username' => $this->POST['username'],
+                            'email' => $this->POST['email'],
+                            'password' => $passwordHash
+                        ]);
+                    } catch (Exception $errors) {
+                        $errors = 'Pseudo ou Email deja utilisé, veuillez changer';
+                    }
 
-                if ($errors === \false) {
-                    return $this->previousPage();
+                    if ($errors === \false) {
+                        return $this->previousPage();
+                    }
                 }
             }
         }

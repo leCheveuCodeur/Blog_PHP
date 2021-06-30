@@ -22,7 +22,10 @@ class MailController extends AppController
         $message = '';
 
         if (!empty($this->POST)) {
-            \extract($this->mail->sendMail($this->POST));
+            // detect spam bot
+            if (empty($this->POST['surname']) && $this->POST['nom'] === '') {
+                \extract($this->mail->sendMail($this->POST));
+            }
         }
         $form = new BootstrapForm();
         $alert = $this->Comment->alert();

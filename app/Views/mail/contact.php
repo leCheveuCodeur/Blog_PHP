@@ -1,11 +1,12 @@
-<div class="blog container-xxl">
+<div class="blog">
 
     <div class="hero_blog">
         <h1 class="hero_blog-title text-center fw-bold">Me Contacter</h1>
     </div>
-    <div>
-        <form class="contact text-dark" method="post">
+    <div class="contact">
+        <form class="contact-form text-dark" method="post">
             <?= $form->input("name", "Nom / Prénom"); ?>
+            <input type="text" name="surname" id="surname" class="picpirate">
             <?= $form->input("mail", "Email", ["type" => "email"]); ?>
             <?= $form->input("subject", "Sujet"); ?>
             <?= $form->input("content", "Message", ["type" => "textarea"]); ?>

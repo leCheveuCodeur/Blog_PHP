@@ -11539,6 +11539,17 @@ footer {
   grid-column: 2/3;
 }
 
+/* GRIZZLY */
+.picpirate {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+  z-index: -1;
+}
+
 /* NAVBAR */
 .navbar-brand:before {
   content: "";
@@ -11897,6 +11908,12 @@ footer {
 
 /* CONTACT */
 .contact {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+}
+
+.contact-form {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto minmax(auto, 550px) auto;
@@ -11904,8 +11921,8 @@ footer {
   grid-row-gap: 15px;
 }
 
-.contact div,
-.contact button {
+.contact-form div,
+.contact-form button {
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2/3;

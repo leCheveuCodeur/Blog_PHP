@@ -8,7 +8,7 @@ use PDOException;
 class Table
 {
     public $table;
-    protected $db;
+    protected MysqlDatabase $db;
 
     public function __construct(MysqlDatabase $db)
     {
@@ -77,9 +77,11 @@ class Table
 
     /**
      * Get the last X rows
-     * @param int $limit number of post to return
-     * @param int $page current page number
-     * @return \App\Entity\PostEntity
+     * @param string $statement
+     * @param null|array $attributes
+     * @param int $limit $limit number of post to return
+     * @param int $page $page current page number
+     * @return mixed
      * @throws PDOException
      */
     public function offset(string $statement, ?array $attributes = [], int $limit, int $page)

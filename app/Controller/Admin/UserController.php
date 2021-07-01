@@ -16,11 +16,11 @@ class UserController extends AppController
      * Display of the connected User's dashboard
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         $comments = $this->Comment->alert();
         $alert = $comments;
 
-        $this->render('admin.user.index', \compact('comments','alert'));
+        $this->render('admin.user.index', \compact('comments', 'alert'));
     }
 }

@@ -20,7 +20,7 @@ class PostController extends AppController
      * @param null|string $message for validation
      * @return void
      */
-    public function index(?string $message = \null)
+    public function index(?string $message = \null): void
     {
         \extract($this->Post->lastByAuhtor($this->SESSION['auth']));
         \extract(Paging::generate(6, 'admin.post.index', $this->Post, $statement, $attributes));

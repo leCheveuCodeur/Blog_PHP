@@ -26,9 +26,9 @@ class App
 
     /**
      * Create an App instance and stock it
-     * @return mixed
+     * @return App
      */
-    public static function getInstance()
+    public static function getInstance(): App
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new App;
@@ -43,7 +43,7 @@ class App
     public static function load()
     {
         session_start();
-        require_once '../vendor/autoload.php';
+        require_once ROOT.'/vendor/autoload.php';
     }
 
     /**
@@ -51,7 +51,7 @@ class App
      * @param string $name table name ex: 'Post'
      * @return object ex: 'PostTable'
      */
-    public function getTable(string $name)
+    public function getTable(string $name): object
     {
         $class_name = "\\App\\Table\\" . \ucfirst($name) . "Table";
         return new $class_name($this->getDb());
@@ -61,7 +61,7 @@ class App
      * Create an DB instance and stock it
      * @return object $db_instance MysqlDatabase
      */
-    public function getDb()
+    public function getDb(): MysqlDatabase
     {
         $config = Config::getInstance(ROOT . "/config/config.php");
         if (empty($this->db_instance)) {

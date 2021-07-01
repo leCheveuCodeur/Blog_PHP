@@ -6,7 +6,7 @@ use Core\Services\Globals\Globals;
 
 class Controller
 {
-    protected $viewPath;
+    protected string $viewPath;
     protected $template;
 
     public function __construct()
@@ -36,7 +36,7 @@ class Controller
      * Get the name of the table associated with the controller
      * @return string ex : 'Post'
      */
-    protected function tableName()
+    protected function tableName(): string
     {
         \preg_match('/[\w\-\_]+(?=Controller)/im', \get_called_class(), $tableName);
         return $tableName[0];
@@ -59,7 +59,7 @@ class Controller
      * @param string $date
      * @return string
      */
-    protected function formatDate(string $date)
+    protected function formatDate(string $date): string
     {
         setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
@@ -94,7 +94,7 @@ class Controller
      * @param string $input
      * @return string
      */
-    protected function antiXss(string $input)
+    protected function antiXss(string $input): string
     {
         return \nl2br(\htmlspecialchars($input), ENT_QUOTES);
     }
@@ -104,7 +104,7 @@ class Controller
      * @param string $global name of the superglobal targeted
      * @return mixed
      */
-    public function accessGlobal(string $global)
+    protected function accessGlobal(string $global)
     {
         $globals = new Globals;
         $global = 'get' . $global;

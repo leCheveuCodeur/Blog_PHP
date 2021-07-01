@@ -17,7 +17,7 @@ class CommentController extends AppController
      * @param null|string $message
      * @return void
      */
-    public function index(?string $message = \null)
+    public function index(?string $message = \null): void
     {
         \extract($this->Comment->pending());
         \extract(Paging::generate(6, 'admin.comment.index', $this->Comment, $statement));

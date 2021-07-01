@@ -19,7 +19,7 @@ class CategoryController extends AppController
      * @param null|string $message
      * @return void
      */
-    public function index(?string $message = \null)
+    public function index(?string $message = \null): void
     {
         \extract($this->Category->list());
         \extract(Paging::generate(6, 'admin.category.index', $this->Category, $statement));

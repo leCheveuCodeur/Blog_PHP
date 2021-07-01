@@ -10,7 +10,7 @@ class PostEntity extends Entity
      * Return the URL of the Post
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return 'index.php?p=post.show.' . $this->id;
     }
@@ -19,7 +19,7 @@ class PostEntity extends Entity
      * Return an extrait of 100 characters
      * @return string
      */
-    public function getExtrait()
+    public function getExtrait(): string
     {
         $html = \substr(\nl2br(\htmlspecialchars($this->leadIn)), 0, 100) . "...";
         $html .= "<p><a href= " . $this->getUrl() . ">Voir la suite</a></p>";

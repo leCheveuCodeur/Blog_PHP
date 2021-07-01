@@ -8,12 +8,10 @@ class CategoryEntity extends Entity
 {
     /**
      * Return the URL of the Category
-     * @return string 
+     * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return "index.php?p=post.category." . $this->id;
     }
-
-
 }

@@ -11541,13 +11541,10 @@ footer {
 
 /* GRIZZLY */
 .picpirate {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 0;
-  width: 0;
-  z-index: -1;
+  position: fixed;
+  top: -500px;
+  left: -500px;
+  visibility: hidden;
 }
 
 /* NAVBAR */
@@ -11576,7 +11573,7 @@ footer {
   display: grid;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
-  grid-row-gap: 25px;
+  row-gap: 25px;
 }
 
 .hero-title {
@@ -11685,7 +11682,7 @@ footer {
       align-content: center;
   -ms-grid-rows: 1fr;
       grid-template-rows: 1fr;
-  grid-row-gap: 10px;
+  row-gap: 10px;
 }
 
 .social {
@@ -11730,7 +11727,7 @@ footer {
 
 .hero_blog-title {
   padding: 3rem 0;
-  background: no-repeat url(/public/img/mask.png);
+  background: no-repeat url(../../img/mask.png);
   background-position: center;
   background-size: 135px;
   font-size: 3rem;
@@ -11784,7 +11781,7 @@ footer {
 }
 
 .post-infos-comments:before {
-  content: url(/public/img/icon_comments_primary.png);
+  content: url(../../img/icon_comments_primary.png);
   display: inline-block;
   position: relative;
   top: 3px;
@@ -11825,7 +11822,7 @@ footer {
       grid-template-columns: 1fr;
   -ms-grid-rows: 0.2fr;
       grid-template-rows: 0.2fr;
-  grid-row-gap: 20px;
+  row-gap: 20px;
 }
 
 .post-show_infos {
@@ -11848,7 +11845,7 @@ footer {
 }
 
 .comments_count:before {
-  content: url(/public/img/icon_comments_secondary.png);
+  content: url(../../img/icon_comments_secondary.png);
   display: inline-block;
   position: relative;
   top: 3px;
@@ -11856,7 +11853,7 @@ footer {
 }
 
 .comments_post:before {
-  content: url(/public/img/icon_comments_post.png);
+  content: url(../../img/icon_comments_post.png);
   display: inline-block;
   position: relative;
   top: 3px;
@@ -11918,7 +11915,7 @@ footer {
   display: grid;
   -ms-grid-columns: auto minmax(auto, 550px) auto;
       grid-template-columns: auto minmax(auto, 550px) auto;
-  grid-row-gap: 15px;
+  row-gap: 15px;
 }
 
 .contact-form div,
@@ -11934,7 +11931,7 @@ footer {
   display: grid;
   -ms-grid-columns: auto minmax(auto, 550px) auto;
       grid-template-columns: auto minmax(auto, 550px) auto;
-  grid-row-gap: 15px;
+  row-gap: 15px;
 }
 
 .user-log div,
@@ -11952,7 +11949,7 @@ footer {
       grid-template-columns: auto minmax(auto, 1290px) auto;
   -ms-grid-rows: auto minmax(64vh, auto);
       grid-template-rows: auto minmax(64vh, auto);
-  grid-row-gap: 20px;
+  row-gap: 20px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -11977,7 +11974,7 @@ footer {
       grid-template-columns: repeat(auto-fit, minmax(auto, 170px));
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  grid-row-gap: 20px;
+  row-gap: 20px;
 }
 
 .admin-edit {
@@ -11985,7 +11982,7 @@ footer {
   display: grid;
   -ms-grid-columns: auto minmax(auto, 700px) auto;
       grid-template-columns: auto minmax(auto, 700px) auto;
-  grid-row-gap: 15px;
+  row-gap: 15px;
 }
 
 .admin-edit div,
@@ -12027,7 +12024,8 @@ footer {
   display: grid !important;
   -ms-grid-columns: auto (minmax(auto, 150px))[2] auto;
       grid-template-columns: auto repeat(2, minmax(auto, 150px)) auto;
-  grid-column-gap: 5px;
+  -webkit-column-gap: 5px;
+          column-gap: 5px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;

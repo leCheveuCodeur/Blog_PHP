@@ -34,7 +34,7 @@ class MysqlDatabase
      * Get PDO - connect to the server
      * @return PDO
      */
-    private function getPDO()
+    private function getPDO(): PDO
     {
         if ($this->pdo === \null) {
             $pdo = new PDO("mysql:dbname={$this->db_name};host={$this->db_host}", $this->db_user, $this->db_pass);

@@ -24,7 +24,6 @@ class Globals
      */
     public function getGET(string $key = \null)
     {
-
         if (null !== $key) {
             return $this->GET[$key] ?? \null;
         }
@@ -38,7 +37,6 @@ class Globals
      */
     public function getPOST(string $key = \null)
     {
-
         if (null !== $key) {
             return $this->POST[$key] ?? \null;
         }
@@ -52,7 +50,6 @@ class Globals
      */
     public function getSERVER(string $key = \null)
     {
-
         if (null !== $key) {
             return $this->SERVER[$key] ?? \null;
         }
@@ -66,23 +63,9 @@ class Globals
      */
     public function getSESSION(string $key = \null)
     {
-
         if (null !== $key) {
             return $this->SESSION[$key] ?? \null;
         }
         return $this->SESSION;
     }
-
-    // /**
-    //  * Set $_SESSION
-    //  * @param string $key
-    //  * @param string $value
-    //  * @return void
-    //  */
-    // public function setSESSION(string $key = \null, string $value)
-    // {
-    //     if (!empty($key)) {
-    //         $this->SESSION[$key] = $value;
-    //     }
-    // }
 }

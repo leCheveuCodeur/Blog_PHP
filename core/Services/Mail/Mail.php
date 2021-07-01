@@ -50,7 +50,7 @@ class Mail
      * @param array $POST
      * @return array with the \compat function | !! use \extract to retrieve
      */
-    public function sendMail(array $POST)
+    public function sendMail(array $POST): array
     {
         $errors = '';
         $message = '';

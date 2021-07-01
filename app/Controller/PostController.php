@@ -20,7 +20,7 @@ class PostController extends AppController
      * @param null|int $page
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         \extract($this->Post->last());
         \extract(Paging::generate(6, 'post.index', $this->Post, $statement));

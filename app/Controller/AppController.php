@@ -20,7 +20,7 @@ class AppController extends Controller
     /**
      * Return the searched Table
      * @param string $model_name
-     * @return mixed
+     * @return object ex:'PostTable'
      */
     protected function loadModel(string $model_name)
     {

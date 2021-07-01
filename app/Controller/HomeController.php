@@ -14,7 +14,7 @@ class HomeController extends AppController
      * Display home page
      * @return void
      */
-    public function index()
+    public function index(): void
     {
         $alert = $this->Comment->alert();
         $this->render('home.index', \compact('alert'));

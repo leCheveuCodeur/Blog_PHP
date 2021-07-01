@@ -79,7 +79,7 @@ class UserController extends AppController
      * User logout
      * @return void
      */
-    public function deconnect()
+    public function deconnect(): void
     {
         \session_destroy();
         $this->previousPage();

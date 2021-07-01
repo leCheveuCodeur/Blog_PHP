@@ -16,14 +16,18 @@ class MailController extends AppController
         $this->mail = new Mail;
     }
 
-    public function contact()
+    /**
+     * Display contact page
+     * @return void
+     */
+    public function contact(): void
     {
         $errors = '';
         $message = '';
 
         if (!empty($this->POST)) {
             // detect spam bot
-            if (empty($this->POST['surname']) && $this->POST['nom'] === '') {
+            if (empty($this->POST['surname']) && $this->POST['surname'] === '') {
                 \extract($this->mail->sendMail($this->POST));
             }
         }

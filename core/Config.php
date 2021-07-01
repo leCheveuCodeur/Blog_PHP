@@ -10,9 +10,9 @@ class Config
     /**
      *Get the configuration variables
      * @param string $file ex: __DIR__. '/config/config.php'
-     * @return mixed
+     * @return Config
      */
-    static function getInstance(string $file)
+    public static function getInstance(string $file): Config
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new Config($file);
@@ -20,7 +20,7 @@ class Config
         return self::$_instance;
     }
 
-    public function __construct($file)
+    public function __construct(string $file)
     {
         $this->settings = require($file);
     }

@@ -31,7 +31,7 @@ The goal of this project is to create a professional blog with the [PHP](https:/
 * Install libraries with **composer**,
 
   ```
-  composer.phar install
+  composer install
   ```
 * Import database with datas : file '***database.sql***',
 * Rename '***config_example.php***' in folder **/config** on '***config.php***' and edit this,

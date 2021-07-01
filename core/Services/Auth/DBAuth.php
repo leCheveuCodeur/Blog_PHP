@@ -36,7 +36,7 @@ class DBAuth
      * @return bool
      * @throws PDOException
      */
-    public function login(string $usernameOrEmail, string $password)
+    public function login(string $usernameOrEmail, string $password): bool
     {
         $user = $this->db->prepare("SELECT * FROM user WHERE username = ? or email = ?", [$usernameOrEmail, $usernameOrEmail], \null, \true);
         if ($user) {
@@ -53,7 +53,7 @@ class DBAuth
      * Checks if the Visitor is logged
      * @return bool
      */
-    public function logged()
+    public function logged(): bool
     {
         return !empty($this->globals->getSESSION("auth"));
     }

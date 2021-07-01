@@ -8,9 +8,9 @@ class CommentEntity extends Entity
 {
     /**
      *  Return the URL of the Comment
-     * @return string 
+     * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return "index.php?p=comment.edit." . $this->id;
     }

@@ -38,7 +38,7 @@
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="?p=user.login<?= \str_replace('p=', '&return=', $this->SERVER['QUERY_STRING']); ?>">Se Connecter</a>
+                            <a class="nav-link" href="?p=user.login<?= !empty($this->SERVER['QUERY_STRING']) ? str_replace('p=', '&return=', $this->SERVER['QUERY_STRING']) : ''; ?>">Se Connecter</a>
                         </li>
                     <?php }; ?>
                     <li class="nav-item">

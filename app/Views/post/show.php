@@ -36,10 +36,10 @@
 
             <div>
                 <?php if (isset($this->SESSION['auth'])) : ?>
-                    <form class="post-show_addcomment mx-auto mt-5" action="index.php/?p=comment.add.<?= $post->id ?>" method="post">
+                    <form class="post-show_addcomment mx-auto mt-5" method="post">
                         <p class="text-center">Laisser un commentaire</p>
-                        <?= $form->input("content", "Commentaire", ["type" => "textarea", "maxlength"=>"5000"]); ?>
-                        <button class="btn btn-primary d-block mx-auto ">Commenter !</button>
+                        <?= $form->input("content", "Commentaire", ["type" => "textarea", "maxlength" => "5000"]); ?>
+                        <button class="btn btn-primary d-block mx-auto ">Soumettre !</button>
                     </form>
                 <?php endif; ?>
             </div>

@@ -5,7 +5,7 @@
     </div>
     <div class="contact">
         <form class="contact-form text-dark" method="post">
-            <label for="surname" aria-hidden="true">Human only</label>
+            <label for="surname" aria-hidden="true" class="picpirate">Human only</label>
             <input type="text" name="surname" id="surname" class="picpirate">
             <?= $form->input("name", "Nom / Prénom"); ?>
             <?= $form->input("mail", "Email", ["type" => "email"]); ?>

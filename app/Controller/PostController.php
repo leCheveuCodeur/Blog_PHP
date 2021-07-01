@@ -55,14 +55,27 @@ class PostController extends AppController
     /**
      * Display of a specific Post
      * @param int $postId
+     * @param null|string $message
      * @return void
      */
-    public function show(int $postId)
+    public function show(int $postId, ?string $message = \null)
     {
+        if (!empty($this->POST) && !empty($this->SESSION)) {
+            $comment = $this->Comment->create([
+                'content' => $this->POST['content'],
+                'firstDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
+                'lastDate' => date('Y-m-d G:i:s', time() + 3600 * 2),
+                'user_id' => $this->SESSION['auth'],
+                'post_id' => $postId
+            ]);
+
+            $message='Commentaire soumis !';
+        };
+
         $post = $this->Post->findWithCategory($postId);
         $comments = $this->Comment->findWithPost($postId);
         $alert = $this->Comment->alert();
-        $form = new BootstrapForm($this->POST);
-        $this->render('post.show', \compact('post', 'comments', 'alert', 'form'));
+        $form = new BootstrapForm();
+        $this->render('post.show', \compact('post', 'comments', 'alert', 'form', 'message'));
     }
 }

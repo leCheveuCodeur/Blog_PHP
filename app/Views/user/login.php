@@ -1,6 +1,6 @@
 <div class="container-xxl text-dark">
     <form class="user-log text mx-auto" method="post">
-        <label for="pseudo" aria-hidden="true">Human only</label>
+        <label for="pseudo" aria-hidden="true" class="picpirate">Human only</label>
         <input type="text" name="pseudo" id="pseudo" class="picpirate">
         <?= $form->input("usernameOrEmail", "Pseudo ou Email"); ?>
         <?= $form->input("password", "Mot de passe", ["type" => "password"]); ?>

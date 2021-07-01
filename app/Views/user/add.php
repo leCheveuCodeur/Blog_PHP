@@ -1,6 +1,6 @@
 <div class="container-xxl text-dark">
     <form class="user-log" method='post'>
-        <label for="nom" aria-hidden="true">Human only</label>
+        <label for="nom" aria-hidden="true" class="picpirate">Human only</label>
         <input type="text" name="nom" id="nom" class="picpirate">
         <?= $form->input('username', 'Pseudo'); ?>
         <?= $form->input('email', 'Adresse mail', ['type' => 'email']); ?>
